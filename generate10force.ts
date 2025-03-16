@@ -1,3 +1,8 @@
+let doc = globalThis.document;
+export function setDocument(document: Document) {
+    doc = document;
+}
+
 type Config = {
     width: number,
     height: number,
@@ -21,21 +26,21 @@ function lerp(a: Point, b: Point, t: number): Point {
 
 const SVG_NS = "http://www.w3.org/2000/svg";
 
-function generate10force(partial: Partial<Config>): SVGSVGElement {
+export function generate10force(partial: Partial<Config> = {}): SVGSVGElement {
     const config = getConfig(partial);
 
     const polygons = generatePolygons(config);
 
-    const svg = document.createElementNS(SVG_NS, "svg");
+    const svg = doc.createElementNS(SVG_NS, "svg");
     svg.setAttribute("xmlns", SVG_NS);
     svg.setAttribute("width", config.width.toString());
     svg.setAttribute("height", config.height.toString());
 
-    const g = svg.appendChild(document.createElementNS(SVG_NS, "g"));
+    const g = svg.appendChild(doc.createElementNS(SVG_NS, "g"));
     g.setAttribute("stroke", "black");
 
     for (const [id, points] of Object.entries(polygons)) {
-        const polygon = g.appendChild(document.createElementNS(SVG_NS, "polygon"));
+        const polygon = g.appendChild(doc.createElementNS(SVG_NS, "polygon"));
         polygon.setAttribute("id", id);
         polygon.setAttribute("points", polygonToString(points));
     }
