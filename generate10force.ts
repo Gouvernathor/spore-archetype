@@ -21,18 +21,45 @@ function lerp(a: Point, b: Point, t: number): Point {
 
 const SVG_NS = "http://www.w3.org/2000/svg";
 
-function generateSVG(config: Partial<Config>): SVGSVGElement {
+function generate10force(partial: Partial<Config>): SVGSVGElement {
+    const config = getConfig(partial);
+
     const polygons = generatePolygons(config);
-    throw new Error("TODO");
+
+    const svg = document.createElementNS(SVG_NS, "svg");
+    svg.setAttribute("xmlns", SVG_NS);
+    svg.setAttribute("width", config.width.toString());
+    svg.setAttribute("height", config.height.toString());
+
+    const g = svg.appendChild(document.createElementNS(SVG_NS, "g"));
+    g.setAttribute("stroke", "black");
+
+    for (const [id, points] of Object.entries(polygons)) {
+        const polygon = g.appendChild(document.createElementNS(SVG_NS, "polygon"));
+        polygon.setAttribute("id", id);
+        polygon.setAttribute("points", polygonToString(points));
+    }
+
+    return svg;
+}
+
+function getConfig({
+    width = 800,
+    height = width,
+    topmargin = true,
+    bottommargin = topmargin,
+    hexfactor = 1/3,
+}: Partial<Config>): Config {
+    return {width, height, topmargin, bottommargin, hexfactor};
 }
 
 function generatePolygons({
-    width = 800,
-    height = width,
+    width,
+    height,
     // topmargin = true,
     // bottommargin = topmargin,
-    hexfactor = 1/3,
-}: Partial<Config>): {[id: string]: Polygon} {
+    hexfactor,
+}: Config): {[id: string]: Polygon} {
     const hauteur = Math.sqrt(3) / 2 * width;
     const marge = (height - hauteur) / 2;
 
