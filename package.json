@@ -1,7 +1,16 @@
 {
+  "type": "module",
   "devDependencies": {
     "@types/jsdom": "^21.1.7",
     "@types/node": "^22.13.10",
-    "jsdom": "^26.0.0"
+    "tsup": "^8.4.0",
+    "typescript": "*"
+  },
+  "optionalDependencies": {
+    "jsdom": "^25.0.1"
+  },
+  "scripts": {
+    "build": "tsup",
+    "10force": "tsup && node boot/10force.cjs"
   }
 }
