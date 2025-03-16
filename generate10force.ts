@@ -69,15 +69,15 @@ function generatePolygons({
     const marge = (height - hauteur) / 2;
 
     const r: Point = [width / 2, marge];
-    const g: Point = [0, width-marge];
-    const b: Point = [width, width-marge];
+    const g: Point = [0, height-marge];
+    const b: Point = [width, height-marge];
 
-    const warriorZealot: Point = [width / 3, (width+marge) / 3];
-    const zealotShaman: Point = [width / 6, 2*width/3 - marge/3];
-    const warriorScientist: Point = [2*width/3, (width+marge) / 3];
-    const scientistTrader: Point = [5*width/6, 2*width/3 - marge/3];
-    const shamanDiplomat: Point = [width / 3, width];
-    const diplomatTrader: Point = [2*width/3, width];
+    const warriorZealot: Point = [width / 3, (height+marge) / 3];
+    const zealotShaman: Point = [width / 6, 2*height/3 - marge/3];
+    const warriorScientist: Point = [2*width/3, (height+marge) / 3];
+    const scientistTrader: Point = [5*width/6, 2*height/3 - marge/3];
+    const shamanDiplomat: Point = [width / 3, height-marge];
+    const diplomatTrader: Point = [2*width/3, height-marge];
 
     const doctoredFactor = (1 - hexfactor) / 2;
     const kzh = lerp(warriorZealot, diplomatTrader, doctoredFactor);
