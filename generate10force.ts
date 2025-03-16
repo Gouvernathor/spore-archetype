@@ -23,13 +23,20 @@ function lerp(a: Point, b: Point, t: number): Point {
     return [a[0] + t * (b[0] - a[0]), a[1] + t * (b[1] - a[1])];
 }
 
-function generate({
+const SVG_NS = "http://www.w3.org/2000/svg";
+
+function generateSVG(config: Partial<Config>): SVGSVGElement {
+    const polygons = generatePolygons(config);
+    throw new Error("TODO");
+}
+
+function generatePolygons({
     width = 800,
     height = width,
     // topmargin = true,
     // bottommargin = topmargin,
     hexfactor = 1/3,
-}: Partial<Config>) {
+}: Partial<Config>): {[id: string]: Polygon} {
     const hauteur = Math.sqrt(3) / 2 * width;
     const marge = (height - hauteur) / 2;
 
@@ -52,7 +59,7 @@ function generate({
     const sbh = lerp(scientistTrader, zealotShaman, doctoredFactor);
     const ksh = lerp(warriorScientist, shamanDiplomat, doctoredFactor);
 
-    const polygons: {[id: string]: Polygon} = {
+    return {
         base: [r, g, b],
 
         warrior: [r, warriorZealot, warriorScientist],
