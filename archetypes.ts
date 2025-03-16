@@ -1,4 +1,4 @@
-import { CardColor, CellCard, CivilizationCard, CreatureCard, TribalCard } from "./cards";
+import { CardColor, CellCard, CivilizationCard, CreatureCard, getCardColor, TribalCard } from "./cards";
 
 export type Sequence = [CellCard, CreatureCard, TribalCard, CivilizationCard];
 
@@ -42,7 +42,7 @@ function isConsistent(sequence: Sequence) {
     // consistency check
     let isSkipped = true;
     for (const phase of sequence) {
-        if (phase !== CellCard.Skipped) {
+        if (getCardColor(phase) !== CardColor.Black) {
             isSkipped = false;
         } else if (!isSkipped) {
             return false;
