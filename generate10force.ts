@@ -38,6 +38,8 @@ export function generate10force(partial: Partial<Config> = {}): SVGSVGElement {
 
     const g = svg.appendChild(doc.createElementNS(SVG_NS, "g"));
     g.setAttribute("stroke", "black");
+    g.setAttribute("stroke-width", "1");
+    g.setAttribute("fill", "none");
 
     for (const [id, points] of Object.entries(polygons)) {
         const polygon = g.appendChild(doc.createElementNS(SVG_NS, "polygon"));
