@@ -55,8 +55,9 @@ function getCounter(sequence: Sequence): Map<CardColor, number> {
     // number of phases with each color (except black)
     const counter: Map<CardColor, number> = new Map();
     for (const phase of sequence) {
-        if (phase as number !== CardColor.Black) {
-            counter.set(phase as number, (counter.get(phase as number) || 0) + 1);
+        const color = getCardColor(phase);
+        if (color !== CardColor.Black) {
+            counter.set(color, (counter.get(color) || 0) + 1);
         }
     }
     counter.delete(CardColor.Black);
