@@ -8,15 +8,11 @@ type Config = {
 type Point = readonly [number, number];
 type Polygon = readonly Point[];
 
-namespace Point {
-    function toString(point: Point) {
-        return point.join(",");
-    }
+function pointToString(point: Point) {
+    return point.join(",");
 }
-namespace Polygon {
-    function toString(polygon: Polygon) {
-        return polygon.map(Point.toString).join(" ");
-    }
+function polygonToString(polygon: Polygon) {
+    return polygon.map(pointToString).join(" ");
 }
 
 function lerp(a: Point, b: Point, t: number): Point {
