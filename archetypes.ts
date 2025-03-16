@@ -2,6 +2,30 @@ import { CardColor, CellCard, CivilizationCard, CreatureCard, getCardColor, Trib
 
 export type Sequence = [CellCard, CreatureCard, TribalCard, CivilizationCard];
 
+export function* generateAllValidSequences() {
+    for (const cell of [CellCard.Skipped, CellCard.Carnivore, CellCard.Herbivore, CellCard.Omnivore]) {
+        for (const creature of [CreatureCard.Skipped, CreatureCard.Predator, CreatureCard.Social, CreatureCard.Adaptable]) {
+            if (creature === CreatureCard.Skipped && cell !== CellCard.Skipped) {
+                continue;
+            }
+
+            for (const tribal of [TribalCard.Skipped, TribalCard.Aggressive, TribalCard.Friendly, TribalCard.Industrious]) {
+                if (tribal === TribalCard.Skipped && creature !== CreatureCard.Skipped) {
+                    continue;
+                }
+
+                for (const civilization of [CivilizationCard.Skipped, CivilizationCard.Military, CivilizationCard.Religious, CivilizationCard.Economic]) {
+                    if (civilization === CivilizationCard.Skipped && tribal !== TribalCard.Skipped) {
+                        continue;
+                    }
+
+                    yield [cell, creature, tribal, civilization] as Sequence;
+                }
+            }
+        }
+    }
+}
+
 export enum Archetype {
     Wanderer,
 
@@ -155,35 +179,12 @@ function getHalf(counter: Map<CardColor, number>): Archetype.Diplomat | Archetyp
     return null;
 }
 
-export function* generateAllValidSequences() {
-    for (const cell of [CellCard.Skipped, CellCard.Carnivore, CellCard.Herbivore, CellCard.Omnivore]) {
-        for (const creature of [CreatureCard.Skipped, CreatureCard.Predator, CreatureCard.Social, CreatureCard.Adaptable]) {
-            if (creature === CreatureCard.Skipped && cell !== CellCard.Skipped) {
-                continue;
-            }
-
-            for (const tribal of [TribalCard.Skipped, TribalCard.Aggressive, TribalCard.Friendly, TribalCard.Industrious]) {
-                if (tribal === TribalCard.Skipped && creature !== CreatureCard.Skipped) {
-                    continue;
-                }
-
-                for (const civilization of [CivilizationCard.Skipped, CivilizationCard.Military, CivilizationCard.Religious, CivilizationCard.Economic]) {
-                    if (civilization === CivilizationCard.Skipped && tribal !== TribalCard.Skipped) {
-                        continue;
-                    }
-
-                    yield [cell, creature, tribal, civilization] as Sequence;
-                }
-            }
-        }
-    }
-}
-
 /**
-test that for each sequence, either:
-- the sequence has a black after a non-black, and is invalid
-- the sequence is all-black, wanderer, and returns null for all three checkers
-- the sequence returns a value for exactly one of the checkers
+ * Test for the consistency of the rules for each path.
+ * test that for each sequence, either:
+ * - the sequence has a black after a non-black, and is invalid
+ * - the sequence is all-black, wanderer, and returns null for all three checkers
+ * - the sequence returns a value for exactly one of the checkers
 */
 export function testAll() {
     const pathsCounter: Map<Archetype, number> = new Map();
