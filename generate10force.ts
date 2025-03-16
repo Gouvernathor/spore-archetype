@@ -11,13 +11,17 @@ type Config = {
     hexfactor: number,
 }
 type Point = readonly [number, number];
-type Polygon = readonly Point[];
+type Points = readonly Point[];
+type Polygon = {
+    id: string,
+    points: Points,
+};
 
 function pointToString(point: Point) {
     return point.join(",");
 }
-function polygonToString(polygon: Polygon) {
-    return polygon.map(pointToString).join(" ");
+function pointsToString(points: Points) {
+    return points.map(pointToString).join(" ");
 }
 
 function lerp(a: Point, b: Point, t: number): Point {
@@ -44,7 +48,7 @@ export function generate10force(partial: Partial<Config> = {}): SVGSVGElement {
     for (const [id, points] of Object.entries(polygons)) {
         const polygon = g.appendChild(doc.createElementNS(SVG_NS, "polygon"));
         polygon.setAttribute("id", id);
-        polygon.setAttribute("points", polygonToString(points));
+        polygon.setAttribute("points", pointsToString(points));
     }
 
     return svg;
@@ -66,7 +70,7 @@ function generatePolygons({
     // topmargin = true,
     // bottommargin = topmargin,
     hexfactor,
-}: Config): {[id: string]: Polygon} {
+}: Config): {[id: string]: Points} {
     const hauteur = Math.sqrt(3) / 2 * width;
     const marge = (height - hauteur) / 2;
 
