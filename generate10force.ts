@@ -1,3 +1,6 @@
+import { Archetype } from "./archetypes";
+import { archetypeCSSColors } from "./display";
+
 let doc = globalThis.document;
 export function setDocument(document: Document) {
     doc = document;
@@ -15,6 +18,7 @@ type Points = readonly Point[];
 type Polygon = {
     id: string,
     points: Points,
+    color?: string,
 };
 
 function pointToString(point: Point) {
@@ -45,10 +49,13 @@ export function generate10force(partial: Partial<Config> = {}): SVGSVGElement {
     g.setAttribute("stroke-width", "1");
     g.setAttribute("fill", "none");
 
-    for (const [id, points] of Object.entries(polygons)) {
-        const polygon = g.appendChild(doc.createElementNS(SVG_NS, "polygon"));
-        polygon.setAttribute("id", id);
-        polygon.setAttribute("points", pointsToString(points));
+    for (const polygon of polygons) {
+        const svgPolygon = g.appendChild(doc.createElementNS(SVG_NS, "polygon"));
+        svgPolygon.setAttribute("id", polygon.id);
+        svgPolygon.setAttribute("points", pointsToString(polygon.points));
+        if (polygon.color) {
+            svgPolygon.setAttribute("fill", polygon.color);
+        }
     }
 
     return svg;
@@ -70,7 +77,7 @@ function generatePolygons({
     // topmargin = true,
     // bottommargin = topmargin,
     hexfactor,
-}: Config): {[id: string]: Points} {
+}: Config): Polygon[] {
     const hauteur = Math.sqrt(3) / 2 * width;
     const marge = (height - hauteur) / 2;
 
@@ -93,18 +100,50 @@ function generatePolygons({
     const sbh = lerp(scientistTrader, zealotShaman, doctoredFactor);
     const ksh = lerp(warriorScientist, shamanDiplomat, doctoredFactor);
 
-    return {
-        base: [r, g, b],
-
-        warrior: [r, warriorZealot, warriorScientist],
-        shaman: [zealotShaman, g, shamanDiplomat],
-        trader: [scientistTrader, diplomatTrader, b],
-
-        knight: [warriorZealot, kzh, ksh, warriorScientist],
-        zealot: [warriorZealot, zealotShaman, zeh, kzh],
-        ecologist: [zealotShaman, shamanDiplomat, edh, zeh],
-        diplomat: [edh, shamanDiplomat, diplomatTrader, dbh],
-        bard: [sbh, dbh, diplomatTrader, scientistTrader],
-        scientist: [warriorScientist, ksh, sbh, scientistTrader],
-    };
+    return [
+        {
+            id: "base",
+            points: [r, g, b],
+        }, {
+            id: "warrior",
+            points: [r, warriorZealot, warriorScientist],
+            color: archetypeCSSColors.get(Archetype.Warrior)!,
+        }, {
+            id: "shaman",
+            points: [zealotShaman, g, shamanDiplomat],
+            color: archetypeCSSColors.get(Archetype.Shaman)!,
+        }, {
+            id: "trader",
+            points: [scientistTrader, diplomatTrader, b],
+            color: archetypeCSSColors.get(Archetype.Trader)!,
+        }, {
+            id: "knight",
+            points: [warriorZealot, kzh, ksh, warriorScientist],
+            color: archetypeCSSColors.get(Archetype.Knight)!,
+        }, {
+            id: "zealot",
+            points: [warriorZealot, zealotShaman, zeh, kzh],
+            color: archetypeCSSColors.get(Archetype.Zealot)!,
+        }, {
+            id: "ecologist",
+            points: [zealotShaman, shamanDiplomat, edh, zeh],
+            color: archetypeCSSColors.get(Archetype.Ecologist)!,
+        }, {
+            id: "diplomat",
+            points: [edh, shamanDiplomat, diplomatTrader, dbh],
+            color: archetypeCSSColors.get(Archetype.Diplomat)!,
+        }, {
+            id: "bard",
+            points: [sbh, dbh, diplomatTrader, scientistTrader],
+            color: archetypeCSSColors.get(Archetype.Bard)!,
+        }, {
+            id: "scientist",
+            points: [warriorScientist, ksh, sbh, scientistTrader],
+            color: archetypeCSSColors.get(Archetype.Scientist)!,
+        }, {
+            id: "wanderer",
+            points: [kzh, zeh, edh, dbh, sbh, ksh],
+            color: archetypeCSSColors.get(Archetype.Wanderer)!,
+        }
+    ];
 }
