@@ -64,9 +64,7 @@ function getCounter(sequence: Sequence): Map<CardColor, number> {
     return counter;
 }
 
-function getPure(sequence: Sequence): Archetype.Warrior | Archetype.Shaman | Archetype.Trader | null {
-    const counter = getCounter(sequence);
-
+function getPure(sequence: Sequence, counter: Map<CardColor, number>): Archetype.Warrior | Archetype.Shaman | Archetype.Trader | null {
     // all non-skipped of the same color
     if (counter.size === 1) {
         const color = counter.keys().next().value as CardColor;
@@ -110,9 +108,7 @@ function getPure(sequence: Sequence): Archetype.Warrior | Archetype.Shaman | Arc
     return null; // not pure
 }
 
-function getTendency(sequence: Sequence): Archetype.Knight | Archetype.Ecologist | Archetype.Bard | null {
-    const counter = getCounter(sequence);
-
+function getTendency(counter: Map<CardColor, number>): Archetype.Knight | Archetype.Ecologist | Archetype.Bard | null {
     // one card for each color but one more of one color (1-1-2)
     // which means, 3 different colors, and one with a value of 2
     if (counter.size === 3) {
@@ -135,9 +131,7 @@ function getTendency(sequence: Sequence): Archetype.Knight | Archetype.Ecologist
     return null;
 }
 
-function getHalf(sequence: Sequence): Archetype.Diplomat | Archetype.Scientist | Archetype.Zealot | null {
-    const counter = getCounter(sequence);
-
+function getHalf(counter: Map<CardColor, number>): Archetype.Diplomat | Archetype.Scientist | Archetype.Zealot | null {
     // cards of exactly two colors with no 3 cards of the same color
     if (counter.size === 2 && !Array.from(counter.values()).some(count => count >= 3)) {
         if (!counter.has(CardColor.Red)) {
