@@ -178,3 +178,62 @@ export function* generateAllValidSequences() {
         }
     }
 }
+
+/**
+test that for each sequence, either:
+- the sequence has a black after a non-black, and is invalid
+- the sequence is all-black, wanderer, and returns null for all three checkers
+- the sequence returns a value for exactly one of the checkers
+*/
+export function testAll() {
+    const pathsCounter: Map<Archetype, number> = new Map();
+
+    for (const sequence of generateAllValidSequences()) {
+        const counter = getCounter(sequence);
+        const pure = getPure(sequence, counter);
+        const tendency = getTendency(counter);
+        const half = getHalf(counter);
+
+        if (pure !== null) {
+            if (tendency !== null) {
+                throw new Error(`Sequence ${sequence} got non-null for pure and tendency`);
+            } else if (half !== null) {
+                throw new Error(`Sequence ${sequence} got non-null for pure and half`);
+            } else {
+                pathsCounter.set(pure, (pathsCounter.get(pure) || 0) + 1);
+            }
+        } else if (tendency !== null) {
+            if (half !== null) {
+                throw new Error(`Sequence ${sequence} got non-null for tendency and half`);
+            } else {
+                pathsCounter.set(tendency, (pathsCounter.get(tendency) || 0) + 1);
+            }
+        } else if (half !== null) {
+            pathsCounter.set(half, (pathsCounter.get(half) || 0) + 1);
+        } else {
+            // all three checkers returned null
+            // test that the sequence is all-black
+            if (!sequence.every(phase => getCardColor(phase) === CardColor.Black)) {
+                throw new Error(`Sequence ${sequence} got null for all checkers`);
+            } else {
+                pathsCounter.set(Archetype.Wanderer, (pathsCounter.get(Archetype.Wanderer) || 0) + 1);
+            }
+        }
+    }
+
+    console.log(`Number of paths, expecting 121 : ${Array.from(pathsCounter.values()).reduce((a, b) => a + b, 0)}`);
+    console.log(`Number of Wanderer paths, expecting 1 : ${pathsCounter.get(Archetype.Wanderer)}`);
+    console.log("Number of pure paths, expecting 14 each :");
+    console.log(`Warrior : ${pathsCounter.get(Archetype.Warrior)}`);
+    console.log(`Shaman : ${pathsCounter.get(Archetype.Shaman)}`);
+    console.log(`Trader : ${pathsCounter.get(Archetype.Trader)}`);
+    console.log("Number of tendency paths, expecting 12 each :");
+    console.log(`Knight : ${pathsCounter.get(Archetype.Knight)}`);
+    console.log(`Ecologist : ${pathsCounter.get(Archetype.Ecologist)}`);
+    console.log(`Bard : ${pathsCounter.get(Archetype.Bard)}`);
+    console.log("Number of half paths, expecting 14 each :");
+    console.log(`Diplomat : ${pathsCounter.get(Archetype.Diplomat)}`);
+    console.log(`Scientist : ${pathsCounter.get(Archetype.Scientist)}`);
+    console.log(`Zealot : ${pathsCounter.get(Archetype.Zealot)}`);
+    return pathsCounter;
+}
