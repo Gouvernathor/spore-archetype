@@ -41,7 +41,7 @@ export function generate10force(partial: Partial<Config> = {}): SVGSVGElement {
     const svg = doc.createElementNS(SVG_NS, "svg");
     svg.setAttribute("xmlns", SVG_NS);
     svg.setAttribute("width", config.side.toString());
-    svg.setAttribute("height", config.side.toString());
+    svg.setAttribute("height", getHauteur(config.side).toString());
 
     const g = svg.appendChild(doc.createElementNS(SVG_NS, "g"));
     g.setAttribute("stroke", "black");
@@ -75,12 +75,11 @@ function generatePolygons({
     // bottommargin = topmargin,
     hexfactor,
 }: Config): Polygon[] {
-    const hauteur = Math.sqrt(3) / 2 * side;
-    const marginy = (side - hauteur) / 2;
+    const hauteur = getHauteur(side);
 
-    const r: Point = [side / 2, marginy];
-    const g: Point = [0, side-marginy];
-    const b: Point = [side, side-marginy];
+    const r: Point = [side / 2, 0];
+    const g: Point = [0, hauteur];
+    const b: Point = [side, hauteur];
 
     const warriorZealot = lerp(r, g, 1/3);
     const zealotShaman = lerp(r, g, 2/3);
@@ -143,4 +142,8 @@ function generatePolygons({
             color: archetypeCSSColors.get(Archetype.Wanderer)!,
         }
     ];
+}
+
+function getHauteur(side: number) {
+    return Math.sqrt(3) / 2 * side;
 }
