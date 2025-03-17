@@ -7,8 +7,7 @@ export function setDocument(document: Document) {
 }
 
 type Config = {
-    width: number,
-    height: number,
+    side: number,
     topmargin: boolean,
     bottommargin: boolean,
     hexfactor: number,
@@ -41,8 +40,8 @@ export function generate10force(partial: Partial<Config> = {}): SVGSVGElement {
 
     const svg = doc.createElementNS(SVG_NS, "svg");
     svg.setAttribute("xmlns", SVG_NS);
-    svg.setAttribute("width", config.width.toString());
-    svg.setAttribute("height", config.height.toString());
+    svg.setAttribute("width", config.side.toString());
+    svg.setAttribute("height", config.side.toString());
 
     const g = svg.appendChild(doc.createElementNS(SVG_NS, "g"));
     g.setAttribute("stroke", "black");
@@ -62,28 +61,26 @@ export function generate10force(partial: Partial<Config> = {}): SVGSVGElement {
 }
 
 function getConfig({
-    width = 800,
-    height = width,
+    side = 800,
     topmargin = true,
     bottommargin = topmargin,
     hexfactor = 1/3,
 }: Partial<Config>): Config {
-    return {width, height, topmargin, bottommargin, hexfactor};
+    return {side, topmargin, bottommargin, hexfactor};
 }
 
 function generatePolygons({
-    width,
-    height,
+    side,
     // topmargin = true,
     // bottommargin = topmargin,
     hexfactor,
 }: Config): Polygon[] {
-    const hauteur = Math.sqrt(3) / 2 * width;
-    const marginy = (height - hauteur) / 2;
+    const hauteur = Math.sqrt(3) / 2 * side;
+    const marginy = (side - hauteur) / 2;
 
-    const r: Point = [width / 2, marginy];
-    const g: Point = [0, height-marginy];
-    const b: Point = [width, height-marginy];
+    const r: Point = [side / 2, marginy];
+    const g: Point = [0, side-marginy];
+    const b: Point = [side, side-marginy];
 
     const warriorZealot = lerp(r, g, 1/3);
     const zealotShaman = lerp(r, g, 2/3);
