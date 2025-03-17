@@ -79,18 +79,18 @@ function generatePolygons({
     hexfactor,
 }: Config): Polygon[] {
     const hauteur = Math.sqrt(3) / 2 * width;
-    const marge = (height - hauteur) / 2;
+    const marginy = (height - hauteur) / 2;
 
-    const r: Point = [width / 2, marge];
-    const g: Point = [0, height-marge];
-    const b: Point = [width, height-marge];
+    const r: Point = [width / 2, marginy];
+    const g: Point = [0, height-marginy];
+    const b: Point = [width, height-marginy];
 
-    const warriorZealot: Point = [width / 3, (height+marge) / 3];
-    const zealotShaman: Point = [width / 6, 2*height/3 - marge/3];
-    const warriorScientist: Point = [2*width/3, (height+marge) / 3];
-    const scientistTrader: Point = [5*width/6, 2*height/3 - marge/3];
-    const shamanDiplomat: Point = [width / 3, height-marge];
-    const diplomatTrader: Point = [2*width/3, height-marge];
+    const warriorZealot = lerp(r, g, 1/3);
+    const zealotShaman = lerp(r, g, 2/3);
+    const warriorScientist = lerp(r, b, 1/3);
+    const scientistTrader = lerp(r, b, 2/3);
+    const shamanDiplomat = lerp(g, b, 1/3);
+    const diplomatTrader = lerp(g, b, 2/3);
 
     const doctoredFactor = (1 - hexfactor) / 2;
     const kzh = lerp(warriorZealot, diplomatTrader, doctoredFactor);
