@@ -8,8 +8,6 @@ export function setDocument(document: Document) {
 
 type Config = {
     side: number,
-    topmargin: boolean,
-    bottommargin: boolean,
     hexfactor: number,
 }
 type Point = readonly [number, number];
@@ -62,17 +60,13 @@ export function generate10force(partial: Partial<Config> = {}): SVGSVGElement {
 
 function getConfig({
     side = 800,
-    topmargin = true,
-    bottommargin = topmargin,
     hexfactor = 1/3,
 }: Partial<Config>): Config {
-    return {side, topmargin, bottommargin, hexfactor};
+    return {side, hexfactor};
 }
 
 function generatePolygons({
     side,
-    // topmargin = true,
-    // bottommargin = topmargin,
     hexfactor,
 }: Config): Polygon[] {
     const hauteur = getHauteur(side);
