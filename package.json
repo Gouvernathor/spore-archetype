@@ -11,6 +11,6 @@
   },
   "scripts": {
     "build": "tsup",
-    "10force": "tsup && node boot/10force.cjs"
+    "10force": "tsup && node boot/10force.js"
   }
 }
