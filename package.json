@@ -1,6 +1,6 @@
 {
   "name": "spore-archetype",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Represents the various rules for space-stage Archetypes based on previous alignment choices in the 2008 game Spore.",
   "keywords": [
     "spore",
