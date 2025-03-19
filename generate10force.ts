@@ -9,7 +9,7 @@ export function setDocument(document: Document) {
 type Config = {
     side: number,
     hexfactor: number,
-}
+};
 type Point = readonly [number, number];
 type Points = readonly Point[];
 type Polygon = {
