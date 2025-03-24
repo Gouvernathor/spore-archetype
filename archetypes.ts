@@ -54,7 +54,7 @@ export enum Archetype {
  */
 export function getArchetype(sequence: Sequence, nullIfInvalid?: false): Archetype;
 export function getArchetype(sequence: Sequence, nullIfInvalid: true): Archetype | null;
-export default function getArchetype(sequence: Sequence, nullIfInvalid: boolean = false): Archetype | null {
+export function getArchetype(sequence: Sequence, nullIfInvalid: boolean = false): Archetype | null {
     if (!isConsistent(sequence)) {
         if (nullIfInvalid) {
             return null;
@@ -65,6 +65,7 @@ export default function getArchetype(sequence: Sequence, nullIfInvalid: boolean 
     const counter = getCounter(sequence);
     return getWanderer(counter) || getPure(sequence, counter) || getTendency(counter) || getHalf(counter);
 }
+export default getArchetype;
 
 function isConsistent(sequence: Sequence) {
     // consistency check
