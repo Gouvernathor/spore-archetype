@@ -1,5 +1,4 @@
 import { Archetype } from "./archetypes";
-import { archetypeCSSColors } from "./display";
 
 let doc = globalThis.document;
 export function setDocument(document: Document) {
@@ -9,13 +8,14 @@ export function setDocument(document: Document) {
 type Config = {
     side: number,
     hexfactor: number,
+    propertiesPerArchetype: {[key in Archetype]?: {[key: string]: string}},
 };
 type Point = readonly [number, number];
 type Points = readonly Point[];
 type Polygon = {
     id: string,
     points: Points,
-    color?: string,
+    attributes?: {[attribute: string]: string},
 };
 
 function pointToString(point: Point) {
@@ -50,8 +50,10 @@ export function generate10force(partial: Partial<Config> = {}): SVGSVGElement {
         const svgPolygon = g.appendChild(doc.createElementNS(SVG_NS, "polygon"));
         svgPolygon.setAttribute("id", polygon.id);
         svgPolygon.setAttribute("points", pointsToString(polygon.points));
-        if (polygon.color) {
-            svgPolygon.setAttribute("fill", polygon.color);
+        if (polygon.attributes) {
+            for (const [attribute, value] of Object.entries(polygon.attributes)) {
+                svgPolygon.setAttribute(attribute, value);
+            }
         }
     }
 
@@ -61,13 +63,15 @@ export function generate10force(partial: Partial<Config> = {}): SVGSVGElement {
 function getConfig({
     side = 800,
     hexfactor = 1/3,
+    propertiesPerArchetype = {},
 }: Partial<Config>): Config {
-    return {side, hexfactor};
+    return {side, hexfactor, propertiesPerArchetype};
 }
 
 function generatePolygons({
     side,
     hexfactor,
+    propertiesPerArchetype,
 }: Config): Polygon[] {
     const hauteur = getHauteur(side);
 
@@ -97,43 +101,43 @@ function generatePolygons({
         }, {
             id: "warrior",
             points: [r, warriorZealot, warriorScientist],
-            color: archetypeCSSColors.get(Archetype.Warrior)!,
+            attributes: propertiesPerArchetype[Archetype.Warrior],
         }, {
             id: "shaman",
             points: [zealotShaman, g, shamanDiplomat],
-            color: archetypeCSSColors.get(Archetype.Shaman)!,
+            attributes: propertiesPerArchetype[Archetype.Shaman],
         }, {
             id: "trader",
             points: [scientistTrader, diplomatTrader, b],
-            color: archetypeCSSColors.get(Archetype.Trader)!,
+            attributes: propertiesPerArchetype[Archetype.Trader],
         }, {
             id: "knight",
             points: [warriorZealot, kzh, ksh, warriorScientist],
-            color: archetypeCSSColors.get(Archetype.Knight)!,
+            attributes: propertiesPerArchetype[Archetype.Knight],
         }, {
             id: "zealot",
             points: [warriorZealot, zealotShaman, zeh, kzh],
-            color: archetypeCSSColors.get(Archetype.Zealot)!,
+            attributes: propertiesPerArchetype[Archetype.Zealot],
         }, {
             id: "ecologist",
             points: [zealotShaman, shamanDiplomat, edh, zeh],
-            color: archetypeCSSColors.get(Archetype.Ecologist)!,
+            attributes: propertiesPerArchetype[Archetype.Ecologist],
         }, {
             id: "diplomat",
             points: [edh, shamanDiplomat, diplomatTrader, dbh],
-            color: archetypeCSSColors.get(Archetype.Diplomat)!,
+            attributes: propertiesPerArchetype[Archetype.Diplomat],
         }, {
             id: "bard",
             points: [sbh, dbh, diplomatTrader, scientistTrader],
-            color: archetypeCSSColors.get(Archetype.Bard)!,
+            attributes: propertiesPerArchetype[Archetype.Bard],
         }, {
             id: "scientist",
             points: [warriorScientist, ksh, sbh, scientistTrader],
-            color: archetypeCSSColors.get(Archetype.Scientist)!,
+            attributes: propertiesPerArchetype[Archetype.Scientist],
         }, {
             id: "wanderer",
             points: [kzh, zeh, edh, dbh, sbh, ksh],
-            color: archetypeCSSColors.get(Archetype.Wanderer)!,
+            attributes: propertiesPerArchetype[Archetype.Wanderer],
         }
     ];
 }
