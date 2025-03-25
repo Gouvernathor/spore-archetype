@@ -14,10 +14,24 @@
     "type": "git",
     "url": "git+https://github.com/Gouvernathor/spore-archetype.git"
   },
+  "exports": {
+    "./*": {
+      "import": {
+        "types": "./dist/*.d.ts",
+        "default": "./dist/*.js"
+      },
+      "require": {
+        "types": "./dist/*.d.cts",
+        "default": "./dist/*.cjs"
+      }
+    }
+  },
+  "files": [
+    "dist"
+  ],
   "license": "GPL-3.0-or-later",
   "author": "Gouvernathor",
   "type": "module",
-  "main": "index.js",
   "scripts": {
     "build": "tsup",
     "10force": "tsup && node boot/10force.js"
