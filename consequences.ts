@@ -1,48 +1,48 @@
 import { CellCard, CivilizationCard, CreatureCard, TribalCard } from "./cards";
 
 export enum CreatureConsequence {
+    RagingRoar = 1,
     SirenSong,
     SummonFlock,
-    RagingRoar,
 }
 export enum TribalConsequence {
+    Traps = 1,
     RefreshingStorm,
     FlyingFish,
-    Traps,
 
+    FireBombs,
     Fireworks,
     Beastmaster,
-    FireBombs,
 }
 export enum CivilizationConsequence {
+    Invulnerability = 1,
     HealingAura,
     StaticBomb,
-    Invulnerability,
 
+    MightyBomb,
     DiploDervish,
     BribeBomb,
-    MightyBomb,
 
+    GadgetBomb,
     BlackCloud,
     AdBlitz,
-    GadgetBomb,
 }
 export enum SpaceConsequence {
+    PowerMonger = 1,
     SocialSuave,
     GentleGeneralist,
-    PowerMonger,
 
+    PrimeSpecimen,
     PleasingPerformance,
     SpeedDemon,
-    PrimeSpecimen,
 
+    ArmsDealer,
     GraciousGreeting,
     ColonyCraze,
-    ArmsDealer,
 
+    PirateBGone,
     GreenKeeper,
     SpiceSavant,
-    PirateBGone,
 }
 export type Consequence = CreatureConsequence | TribalConsequence | CivilizationConsequence | SpaceConsequence;
 
