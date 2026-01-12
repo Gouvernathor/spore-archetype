@@ -15,7 +15,7 @@ type Points = readonly Point[];
 type Polygon = {
     id: string,
     points: Points,
-    attributes?: {[attribute: string]: string},
+    attributes?: {[attribute: string]: string}|undefined,
 };
 
 function pointToString(point: Point) {
