@@ -1,4 +1,4 @@
-import { CellCard, CivilizationCard, CreatureCard, TribalCard } from "../cards";
+import { CardColor, CellCard, CivilizationCard, CreatureCard, getCardColor, TribalCard } from "../cards";
 
 export type Sequence = [CellCard, CreatureCard, TribalCard, CivilizationCard];
 
@@ -24,4 +24,30 @@ export function* generateAllValidSequences() {
             }
         }
     }
+}
+
+export function isConsistent(sequence: Sequence) {
+    // consistency check
+    let isSkipped = true;
+    for (const phase of sequence) {
+        if (getCardColor(phase) !== CardColor.Black) {
+            isSkipped = false;
+        } else if (!isSkipped) {
+            return false;
+        }
+    }
+    return true;
+}
+
+export function getCounter(sequence: Sequence): Map<CardColor, number> {
+    // number of phases with each color (except black)
+    const counter: Map<CardColor, number> = new Map();
+    for (const phase of sequence) {
+        const color = getCardColor(phase);
+        if (color !== CardColor.Black) {
+            counter.set(color, (counter.get(color) || 0) + 1);
+        }
+    }
+    counter.delete(CardColor.Black);
+    return counter;
 }
