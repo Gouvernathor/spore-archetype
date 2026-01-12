@@ -30,6 +30,6 @@ export enum CivilizationCard {
     Economic = CardColor.Blue,
 }
 
-export function getCardColor(color: CellCard|CreatureCard|TribalCard|CivilizationCard) {
-    return color as number as CardColor;
+export function getCardColor(color: CellCard|CreatureCard|TribalCard|CivilizationCard): CardColor {
+    return color as number;
 }
