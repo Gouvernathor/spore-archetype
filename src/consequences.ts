@@ -1,4 +1,4 @@
-import { Archetype } from "./archetypes.js";
+import { Archetype } from "./archetypes";
 import { CellCard, CivilizationCard, CreatureCard, TribalCard } from "./cards.js";
 import { Era } from "./eras.js";
 

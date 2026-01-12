@@ -1,4 +1,4 @@
-import { Archetype } from "./archetypes.js";
+import { Archetype } from "./archetypes";
 
 let doc = globalThis.document;
 export function setDocument(document: Document) {

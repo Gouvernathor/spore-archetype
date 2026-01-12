@@ -1,4 +1,4 @@
-import { Archetype } from "./archetypes.js";
+import { Archetype } from "./archetypes";
 
 export enum Philosophy {
     Chance,
