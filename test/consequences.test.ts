@@ -7,33 +7,33 @@ import { Archetype } from "../src/archetypes";
 describe("consistency of runtime checks with typing", () => {
     it("matches cell card consequences", () => {
         for (const card of [CellCard.Carnivore, CellCard.Herbivore, CellCard.Omnivore] as const) {
-            const mapConsequences = cellCardConsequences.get(card);
-            const funConsequences = getConsequencesOfCard(card, Era.Cell);
-            expect(mapConsequences).toEqual(funConsequences);
+            const indexConsequences = cellCardConsequences[card];
+            const functConsequences = getConsequencesOfCard(card, Era.Cell);
+            expect(indexConsequences).toEqual(functConsequences);
         }
     });
 
     it("matches creature card consequences", () => {
         for (const card of [CreatureCard.Predator, CreatureCard.Social, CreatureCard.Adaptable] as const) {
-            const mapConsequences = creatureCardConsequences.get(card);
-            const funConsequences = getConsequencesOfCard(card, Era.Creature);
-            expect(mapConsequences).toEqual(funConsequences);
+            const indexConsequences = creatureCardConsequences[card];
+            const functConsequences = getConsequencesOfCard(card, Era.Creature);
+            expect(indexConsequences).toEqual(functConsequences);
         }
     });
 
     it("matches tribal card consequences", () => {
         for (const card of [TribalCard.Aggressive, TribalCard.Friendly, TribalCard.Industrious] as const) {
-            const mapConsequences = tribalCardConsequences.get(card);
-            const funConsequences = getConsequencesOfCard(card, Era.Tribal);
-            expect(mapConsequences).toEqual(funConsequences);
+            const indexConsequences = tribalCardConsequences[card];
+            const functConsequences = getConsequencesOfCard(card, Era.Tribal);
+            expect(indexConsequences).toEqual(functConsequences);
         }
     });
 
     it("matches civilization card consequences", () => {
         for (const card of [CivilizationCard.Military, CivilizationCard.Religious, CivilizationCard.Economic] as const) {
-            const mapConsequences = civilizationCardConsequences.get(card);
-            const funConsequences = getConsequencesOfCard(card, Era.Civilization);
-            expect(mapConsequences).toEqual(funConsequences);
+            const indexConsequences = civilizationCardConsequences[card];
+            const functConsequences = getConsequencesOfCard(card, Era.Civilization);
+            expect(indexConsequences).toEqual(functConsequences);
         }
     });
 

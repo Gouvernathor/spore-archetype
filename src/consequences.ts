@@ -48,26 +48,68 @@ export enum SpaceConsequence {
 }
 export type Consequence = CreatureConsequence | TribalConsequence | CivilizationConsequence | SpaceConsequence;
 
-export const cellCardConsequences: ReadonlyMap<CellCard, readonly [CreatureConsequence, TribalConsequence, CivilizationConsequence, SpaceConsequence]> = new Map([
-    [CellCard.Carnivore, [CreatureConsequence.RagingRoar, TribalConsequence.Traps, CivilizationConsequence.Invulnerability, SpaceConsequence.PowerMonger]],
-    [CellCard.Herbivore, [CreatureConsequence.SirenSong, TribalConsequence.RefreshingStorm, CivilizationConsequence.HealingAura, SpaceConsequence.SocialSuave]],
-    [CellCard.Omnivore, [CreatureConsequence.SummonFlock, TribalConsequence.FlyingFish, CivilizationConsequence.StaticBomb, SpaceConsequence.GentleGeneralist]],
-]);
-export const creatureCardConsequences: ReadonlyMap<CreatureCard, readonly [TribalConsequence, CivilizationConsequence, SpaceConsequence]> = new Map([
-    [CreatureCard.Predator, [TribalConsequence.FireBombs, CivilizationConsequence.MightyBomb, SpaceConsequence.PrimeSpecimen]],
-    [CreatureCard.Social, [TribalConsequence.Fireworks, CivilizationConsequence.DiploDervish, SpaceConsequence.PleasingPerformance]],
-    [CreatureCard.Adaptable, [TribalConsequence.Beastmaster, CivilizationConsequence.BribeBomb, SpaceConsequence.SpeedDemon]],
-]);
-export const tribalCardConsequences: ReadonlyMap<TribalCard, readonly [CivilizationConsequence, SpaceConsequence]> = new Map([
-    [TribalCard.Aggressive, [CivilizationConsequence.GadgetBomb, SpaceConsequence.ArmsDealer]],
-    [TribalCard.Friendly, [CivilizationConsequence.BlackCloud, SpaceConsequence.GraciousGreeting]],
-    [TribalCard.Industrious, [CivilizationConsequence.AdBlitz, SpaceConsequence.ColonyCraze]],
-]);
-export const civilizationCardConsequences: ReadonlyMap<CivilizationCard, readonly [SpaceConsequence]> = new Map([
-    [CivilizationCard.Military, [SpaceConsequence.PirateBGone]],
-    [CivilizationCard.Religious, [SpaceConsequence.GreenKeeper]],
-    [CivilizationCard.Economic, [SpaceConsequence.SpiceSavant]],
-]);
+export const cellCardConsequences: { [Card in CellCard]?: readonly [CreatureConsequence, TribalConsequence, CivilizationConsequence, SpaceConsequence] } = {
+    [CellCard.Carnivore]: [
+        CreatureConsequence.RagingRoar,
+        TribalConsequence.Traps,
+        CivilizationConsequence.Invulnerability,
+        SpaceConsequence.PowerMonger,
+    ],
+    [CellCard.Herbivore]: [
+        CreatureConsequence.SirenSong,
+        TribalConsequence.RefreshingStorm,
+        CivilizationConsequence.HealingAura,
+        SpaceConsequence.SocialSuave,
+    ],
+    [CellCard.Omnivore]: [
+        CreatureConsequence.SummonFlock,
+        TribalConsequence.FlyingFish,
+        CivilizationConsequence.StaticBomb,
+        SpaceConsequence.GentleGeneralist,
+    ],
+};
+export const creatureCardConsequences: { [Card in CreatureCard]?: readonly [TribalConsequence, CivilizationConsequence, SpaceConsequence] } = {
+    [CreatureCard.Predator]: [
+        TribalConsequence.FireBombs,
+        CivilizationConsequence.MightyBomb,
+        SpaceConsequence.PrimeSpecimen,
+    ],
+    [CreatureCard.Social]: [
+        TribalConsequence.Fireworks,
+        CivilizationConsequence.DiploDervish,
+        SpaceConsequence.PleasingPerformance,
+    ],
+    [CreatureCard.Adaptable]: [
+        TribalConsequence.Beastmaster,
+        CivilizationConsequence.BribeBomb,
+        SpaceConsequence.SpeedDemon,
+    ],
+};
+export const tribalCardConsequences: { [Card in TribalCard]?: readonly [CivilizationConsequence, SpaceConsequence] } = {
+    [TribalCard.Aggressive]: [
+        CivilizationConsequence.GadgetBomb,
+        SpaceConsequence.ArmsDealer,
+    ],
+    [TribalCard.Friendly]: [
+        CivilizationConsequence.BlackCloud,
+        SpaceConsequence.GraciousGreeting,
+    ],
+    [TribalCard.Industrious]: [
+        CivilizationConsequence.AdBlitz,
+        SpaceConsequence.ColonyCraze,
+    ],
+};
+export const civilizationCardConsequences: { [Card in CivilizationCard]?: readonly [SpaceConsequence] } = {
+    [CivilizationCard.Military]: [
+        SpaceConsequence.PirateBGone,
+    ],
+    [CivilizationCard.Religious]: [
+        SpaceConsequence.GreenKeeper,
+    ],
+    [CivilizationCard.Economic]: [
+        SpaceConsequence.SpiceSavant,
+    ],
+};
 
 export function getConsequencesOfCard(
     card: Exclude<CellCard, CellCard.Skipped>,
