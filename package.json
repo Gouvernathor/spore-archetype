@@ -19,7 +19,7 @@
       "import": {
         "types": "./dist/*.d.ts",
         "default": "./dist/*.js"
-            }
+      }
     }
   },
   "files": [
@@ -31,13 +31,13 @@
   "scripts": {
     "build": "tsc",
     "10force": "tsc && node boot/10force.js"
-    },
+  },
   "devDependencies": {
     "@types/jsdom": "^21.1.7",
     "@types/node": "^22.13.10",
-        "typescript": "*"
+    "typescript": "*"
   },
   "optionalDependencies": {
-    "jsdom": "^25.0.1"
+    "jsdom": "^27.4.0"
   }
 }
