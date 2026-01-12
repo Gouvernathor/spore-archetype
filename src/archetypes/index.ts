@@ -1,5 +1,6 @@
 import { Archetype } from "./base.js";
-import { Sequence } from "./sequence.js";
+import { getCounter, isConsistent, Sequence } from "./sequence.js";
+import { getHalf, getPure, getTendency, getWanderer } from "./specific.js";
 
 export { Archetype } from "./base.js";
 export { generateAllValidSequences, Sequence } from "./sequence.js";
@@ -11,12 +12,26 @@ export { generateAllValidSequences, Sequence } from "./sequence.js";
  * elif you have cards of exactly two colors with no 3 cards of the same color, you are half of those two colors
  * @param nullIfInvalid if the sequence is inconsistent and this is true, return null instead of throwing an error
  */
-export declare function getArchetype(
+export function getArchetype(
     sequence: Sequence,
     nullIfInvalid?: false,
 ): Archetype;
-export declare function getArchetype(
+export function getArchetype(
     sequence: Sequence,
     nullIfInvalid: true,
 ): Archetype|null;
-// export default
+export function getArchetype(
+    sequence: Sequence,
+    nullIfInvalid = false,
+): Archetype | null {
+    if (!isConsistent(sequence)) {
+        if (nullIfInvalid) {
+            return null;
+        }
+        throw new Error("Invalid sequence");
+    }
+
+    const counter = getCounter(sequence);
+    return getWanderer(counter) || getPure(sequence, counter) || getTendency(counter) || getHalf(counter);
+}
+export default getArchetype;
