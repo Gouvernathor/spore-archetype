@@ -48,7 +48,14 @@ export enum SpaceConsequence {
 }
 export type Consequence = CreatureConsequence | TribalConsequence | CivilizationConsequence | SpaceConsequence;
 
-export const cellCardConsequences: { [Card in CellCard]?: readonly [CreatureConsequence, TribalConsequence, CivilizationConsequence, SpaceConsequence] } = {
+export const cellCardConsequences: {
+    [Card in Exclude<CellCard, CellCard.Skipped>]: readonly [
+        CreatureConsequence,
+        TribalConsequence,
+        CivilizationConsequence,
+        SpaceConsequence,
+    ]
+} = {
     [CellCard.Carnivore]: [
         CreatureConsequence.RagingRoar,
         TribalConsequence.Traps,
@@ -68,7 +75,13 @@ export const cellCardConsequences: { [Card in CellCard]?: readonly [CreatureCons
         SpaceConsequence.GentleGeneralist,
     ],
 };
-export const creatureCardConsequences: { [Card in CreatureCard]?: readonly [TribalConsequence, CivilizationConsequence, SpaceConsequence] } = {
+export const creatureCardConsequences: {
+    [Card in Exclude<CreatureCard, CreatureCard.Skipped>]: readonly [
+        TribalConsequence,
+        CivilizationConsequence,
+        SpaceConsequence,
+    ]
+} = {
     [CreatureCard.Predator]: [
         TribalConsequence.FireBombs,
         CivilizationConsequence.MightyBomb,
@@ -85,7 +98,12 @@ export const creatureCardConsequences: { [Card in CreatureCard]?: readonly [Trib
         SpaceConsequence.SpeedDemon,
     ],
 };
-export const tribalCardConsequences: { [Card in TribalCard]?: readonly [CivilizationConsequence, SpaceConsequence] } = {
+export const tribalCardConsequences: {
+    [Card in Exclude<TribalCard, TribalCard.Skipped>]: readonly [
+        CivilizationConsequence,
+        SpaceConsequence,
+    ]
+} = {
     [TribalCard.Aggressive]: [
         CivilizationConsequence.GadgetBomb,
         SpaceConsequence.ArmsDealer,
@@ -99,7 +117,11 @@ export const tribalCardConsequences: { [Card in TribalCard]?: readonly [Civiliza
         SpaceConsequence.ColonyCraze,
     ],
 };
-export const civilizationCardConsequences: { [Card in CivilizationCard]?: readonly [SpaceConsequence] } = {
+export const civilizationCardConsequences: {
+    [Card in Exclude<CivilizationCard, CivilizationCard.Skipped>]: readonly [
+        SpaceConsequence,
+    ]
+} = {
     [CivilizationCard.Military]: [
         SpaceConsequence.PirateBGone,
     ],
