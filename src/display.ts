@@ -1,5 +1,5 @@
-import { Archetype } from "./archetypes";
-import { CardColor } from "./cards";
+import { Archetype } from "./archetypes.js";
+import { CardColor } from "./cards.js";
 
 export const cardCSSColors = new Map([
     [CardColor.Black, "#000000"],

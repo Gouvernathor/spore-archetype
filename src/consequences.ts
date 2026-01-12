@@ -1,6 +1,6 @@
-import { Archetype } from "./archetypes";
-import { CellCard, CivilizationCard, CreatureCard, TribalCard } from "./cards";
-import { Era } from "./eras";
+import { Archetype } from "./archetypes.js";
+import { CellCard, CivilizationCard, CreatureCard, TribalCard } from "./cards.js";
+import { Era } from "./eras.js";
 
 export enum CreatureConsequence {
     RagingRoar = 1,
