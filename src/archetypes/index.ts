@@ -1,5 +1,8 @@
-import { Archetype } from "./base";
-import { Sequence } from "./sequence";
+import { Archetype } from "./base.js";
+import { Sequence } from "./sequence.js";
+
+export { Archetype } from "./base.js";
+export { generateAllValidSequences, Sequence } from "./sequence.js";
 
 /**
  * if you have three of the same color, or all of the same color, you are pure of that color
@@ -16,3 +19,4 @@ export declare function getArchetype(
     sequence: Sequence,
     nullIfInvalid: true,
 ): Archetype|null;
+// export default
