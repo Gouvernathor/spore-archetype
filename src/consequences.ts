@@ -69,11 +69,26 @@ export const civilizationCardConsequences: ReadonlyMap<CivilizationCard, readonl
     [CivilizationCard.Economic, [SpaceConsequence.SpiceSavant]],
 ]);
 
-export function getConsequencesOfCard(card: CellCard, era: Era.Cell): [CreatureConsequence, TribalConsequence, CivilizationConsequence, SpaceConsequence];
-export function getConsequencesOfCard(card: CreatureCard, era: Era.Creature): [TribalConsequence, CivilizationConsequence, SpaceConsequence];
-export function getConsequencesOfCard(card: TribalCard, era: Era.Tribal): [CivilizationConsequence, SpaceConsequence];
-export function getConsequencesOfCard(card: CivilizationCard, era: Era.Civilization): [SpaceConsequence];
-export function getConsequencesOfCard(card: Archetype, era: Era.Space): [];
+export function getConsequencesOfCard(
+    card: Exclude<CellCard, CellCard.Skipped>,
+    era: Era.Cell,
+): [CreatureConsequence, TribalConsequence, CivilizationConsequence, SpaceConsequence];
+export function getConsequencesOfCard(
+    card: Exclude<CreatureCard, CreatureCard.Skipped>,
+    era: Era.Creature,
+): [TribalConsequence, CivilizationConsequence, SpaceConsequence];
+export function getConsequencesOfCard(
+    card: Exclude<TribalCard, TribalCard.Skipped>,
+    era: Era.Tribal,
+): [CivilizationConsequence, SpaceConsequence];
+export function getConsequencesOfCard(
+    card: Exclude<CivilizationCard, CivilizationCard.Skipped>,
+    era: Era.Civilization,
+): [SpaceConsequence];
+export function getConsequencesOfCard(
+    card: Archetype,
+    era: Era.Space,
+): [];
 export function getConsequencesOfCard(color: number, era: Era) {
     return Array(Era.Space-era).fill(3*era + color);
 }
