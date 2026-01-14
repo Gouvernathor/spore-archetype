@@ -29,9 +29,10 @@
   "author": "Gouvernathor",
   "type": "module",
   "scripts": {
-    "build": "tsc",
+    "build": "npm run build:js",
+    "build:js": "tsc",
     "test": "vitest",
-    "10force": "tsc && node boot/10force.js"
+    "10force": "npm run build:js && node boot/10force.js"
   },
   "devDependencies": {
     "@tsconfig/strictest": "^2.0.8",
