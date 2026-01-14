@@ -1,0 +1,23 @@
+@use "colors" as colors;
+
+:root {
+    --card-color-black: #{colors.$card-color-black};
+    --card-color-red: #{colors.$card-color-red};
+    --card-color-green: #{colors.$card-color-green};
+    --card-color-blue: #{colors.$card-color-blue};
+
+
+    --archetype-color-wanderer: #{colors.$archetype-color-wanderer};
+
+    --archetype-color-warrior: #{colors.$archetype-color-warrior};
+    --archetype-color-shaman: #{colors.$archetype-color-shaman};
+    --archetype-color-trader: #{colors.$archetype-color-trader};
+
+    --archetype-color-knight: #{colors.$archetype-color-knight};
+    --archetype-color-ecologist: #{colors.$archetype-color-ecologist};
+    --archetype-color-bard: #{colors.$archetype-color-bard};
+
+    --archetype-color-diplomat: #{colors.$archetype-color-diplomat};
+    --archetype-color-scientist: #{colors.$archetype-color-scientist};
+    --archetype-color-zealot: #{colors.$archetype-color-zealot};
+}

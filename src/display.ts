@@ -1,6 +1,7 @@
 import { Archetype } from "./archetypes";
 import { CardColor } from "./cards.js";
 
+/** @deprecated moved to colors.css */
 export const cardCSSColors = new Map([
     [CardColor.Black, "#000000"],
     [CardColor.Red, "#CE3F17"],
@@ -8,6 +9,7 @@ export const cardCSSColors = new Map([
     [CardColor.Blue, "#4ABDDA"],
 ]);
 
+/** @deprecated moved to colors.css */
 export const archetypeCSSColors = new Map([
     [Archetype.Wanderer, "#939699"],
 
