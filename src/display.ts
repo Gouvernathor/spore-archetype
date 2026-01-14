@@ -1,4 +1,4 @@
-import { Archetype } from "./archetypes";
+import { Archetype } from "./archetypes/index.js";
 import { CardColor } from "./cards.js";
 
 export const cardCSSColors: {

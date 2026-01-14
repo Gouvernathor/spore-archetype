@@ -1,4 +1,4 @@
-import { Archetype } from "./archetypes";
+import { Archetype } from "./archetypes/index.js";
 
 /**
  * Makes the document constant available, whether in a browser or in Node.js,

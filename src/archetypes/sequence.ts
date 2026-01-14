@@ -1,4 +1,4 @@
-import { CardColor, CellCard, CivilizationCard, CreatureCard, getCardColor, TribalCard } from "../cards";
+import { CardColor, CellCard, CivilizationCard, CreatureCard, getCardColor, TribalCard } from "../cards.js";
 
 export type Sequence = [CellCard, CreatureCard, TribalCard, CivilizationCard];
 

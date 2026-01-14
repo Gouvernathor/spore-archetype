@@ -1,6 +1,6 @@
-import { CardColor, CivilizationCard } from "../cards";
-import { Archetype } from "./base";
-import { Sequence } from "./sequence";
+import { CardColor, CivilizationCard } from "../cards.js";
+import { Archetype } from "./base.js";
+import { Sequence } from "./sequence.js";
 
 export function getWanderer(counter: Map<CardColor, number>): Archetype.Wanderer | null {
     // return sequence.every(phase => getCardColor(phase) === CardColor.Black) ? Archetype.Wanderer : null;
