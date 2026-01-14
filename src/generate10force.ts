@@ -12,8 +12,16 @@ if (!globalThis.document) {
 }
 
 interface Config {
+    /** The size of a side of the big triangle. */
     readonly side: number,
+
+    /**
+     * This is a factor, proportional to the perimeter of the center hexagon.
+     * At 0, there is no center hexagon.
+     * At 1, all 6 non-pure archetypes have no room to be displayed.
+     */
     readonly hexfactor: number,
+
     readonly propertiesPerArchetype: { readonly [key in Archetype]?: { [key: string]: string } },
 };
 type Point = readonly [number, number];
@@ -84,15 +92,42 @@ function generatePolygons({
 }: Config): Polygon[] {
     const hauteur = getHauteur(side);
 
+    /** The point of the base triangle where there are the most red cards */
     const r: Point = [side / 2, 0];
+    /** The point of the base triangle where there are the most green cards */
     const g: Point = [0, hauteur];
+    /** The point of the base triangle where there are the most blue cards */
     const b: Point = [side, hauteur];
 
+    /**
+     * The convergence point of the Warrior, Knight and Zealot areas.
+     * Red Red Green
+     */
     const warriorZealot = lerp(r, g, 1/3);
+    /**
+     * The convergence point of the Shaman, Ecologist and Zealot areas.
+     * Green Green Red
+     */
     const zealotShaman = lerp(r, g, 2/3);
+    /**
+     * The convergence point of the Warrior, Knight and Scientist areas.
+     * Red Red Blue
+     */
     const warriorScientist = lerp(r, b, 1/3);
+    /**
+     * The convergence point of the Trader, Bard and Scientist areas.
+     * Blue Blue Red
+     */
     const scientistTrader = lerp(r, b, 2/3);
+    /**
+     * The convergence point of the Shaman, Ecologist and Diplomat areas.
+     * Green Green Blue
+     */
     const shamanDiplomat = lerp(g, b, 1/3);
+    /**
+     * The convergence point of the Trader, Bard and Diplomat areas.
+     * Blue Blue Green
+     */
     const diplomatTrader = lerp(g, b, 2/3);
 
     const doctoredFactor = (1 - hexfactor) / 2;
