@@ -103,32 +103,32 @@ function generatePolygons({
      * The convergence point of the Warrior, Knight and Zealot areas.
      * Red Red Green
      */
-    const warriorZealot = lerp(r, g, 1/3);
+    const warriorKnightZealot = lerp(r, g, 1/3);
     /**
      * The convergence point of the Shaman, Ecologist and Zealot areas.
      * Green Green Red
      */
-    const zealotShaman = lerp(r, g, 2/3);
+    const shamanEcologistZealot = lerp(r, g, 2/3);
     /**
      * The convergence point of the Warrior, Knight and Scientist areas.
      * Red Red Blue
      */
-    const warriorScientist = lerp(r, b, 1/3);
+    const warriorKnightScientist = lerp(r, b, 1/3);
     /**
      * The convergence point of the Trader, Bard and Scientist areas.
      * Blue Blue Red
      */
-    const scientistTrader = lerp(r, b, 2/3);
+    const traderBardScientist = lerp(r, b, 2/3);
     /**
      * The convergence point of the Shaman, Ecologist and Diplomat areas.
      * Green Green Blue
      */
-    const shamanDiplomat = lerp(g, b, 1/3);
+    const shamanEcologistDiplomat = lerp(g, b, 1/3);
     /**
      * The convergence point of the Trader, Bard and Diplomat areas.
      * Blue Blue Green
      */
-    const diplomatTrader = lerp(g, b, 2/3);
+    const traderBardDiplomat = lerp(g, b, 2/3);
 
     /** The center point of the hexagon and of the base triangle */
     const centerPoint: Point = [
@@ -137,17 +137,17 @@ function generatePolygons({
     ];
 
     /** The convergence point between the Knight, the Zealot, and the central Wanderer hexagon */
-    const kzh = lerp(centerPoint, warriorZealot, hexfactor);
+    const knightZealotHex = lerp(centerPoint, warriorKnightZealot, hexfactor);
     /** The convergence point between the Ecologist, the Zealot, and the central Wanderer hexagon */
-    const zeh = lerp(centerPoint, zealotShaman, hexfactor);
+    const ecologistZealotHex = lerp(centerPoint, shamanEcologistZealot, hexfactor);
     /** The convergence point between the Ecologist, the Diplomat, and the central Wanderer hexagon */
-    const edh = lerp(centerPoint, shamanDiplomat, hexfactor);
+    const ecologistDiplomatHex = lerp(centerPoint, shamanEcologistDiplomat, hexfactor);
     /** The convergence point between the Bard, the Diplomat, and the central Wanderer hexagon */
-    const dbh = lerp(centerPoint, diplomatTrader, hexfactor);
+    const bardDiplomatHex = lerp(centerPoint, traderBardDiplomat, hexfactor);
     /** The convergence point between the Bard, the Scientist, and the central Wanderer hexagon */
-    const sbh = lerp(centerPoint, scientistTrader, hexfactor);
+    const bardScientistHex = lerp(centerPoint, traderBardScientist, hexfactor);
     /** The convergence point between the Knight, the Scientist, and the central Wanderer hexagon */
-    const ksh = lerp(centerPoint, warriorScientist, hexfactor);
+    const knightScientistHex = lerp(centerPoint, warriorKnightScientist, hexfactor);
 
     return [
         {
@@ -155,43 +155,43 @@ function generatePolygons({
             points: [r, g, b],
         }, {
             id: "warrior",
-            points: [r, warriorZealot, warriorScientist],
+            points: [r, warriorKnightZealot, warriorKnightScientist],
             attributes: propertiesPerArchetype[Archetype.Warrior],
         }, {
             id: "shaman",
-            points: [zealotShaman, g, shamanDiplomat],
+            points: [shamanEcologistZealot, g, shamanEcologistDiplomat],
             attributes: propertiesPerArchetype[Archetype.Shaman],
         }, {
             id: "trader",
-            points: [scientistTrader, diplomatTrader, b],
+            points: [traderBardScientist, traderBardDiplomat, b],
             attributes: propertiesPerArchetype[Archetype.Trader],
         }, {
             id: "knight",
-            points: [warriorZealot, kzh, ksh, warriorScientist],
+            points: [warriorKnightZealot, knightZealotHex, knightScientistHex, warriorKnightScientist],
             attributes: propertiesPerArchetype[Archetype.Knight],
         }, {
             id: "zealot",
-            points: [warriorZealot, zealotShaman, zeh, kzh],
+            points: [warriorKnightZealot, shamanEcologistZealot, ecologistZealotHex, knightZealotHex],
             attributes: propertiesPerArchetype[Archetype.Zealot],
         }, {
             id: "ecologist",
-            points: [zealotShaman, shamanDiplomat, edh, zeh],
+            points: [shamanEcologistZealot, shamanEcologistDiplomat, ecologistDiplomatHex, ecologistZealotHex],
             attributes: propertiesPerArchetype[Archetype.Ecologist],
         }, {
             id: "diplomat",
-            points: [edh, shamanDiplomat, diplomatTrader, dbh],
+            points: [ecologistDiplomatHex, shamanEcologistDiplomat, traderBardDiplomat, bardDiplomatHex],
             attributes: propertiesPerArchetype[Archetype.Diplomat],
         }, {
             id: "bard",
-            points: [sbh, dbh, diplomatTrader, scientistTrader],
+            points: [bardScientistHex, bardDiplomatHex, traderBardDiplomat, traderBardScientist],
             attributes: propertiesPerArchetype[Archetype.Bard],
         }, {
             id: "scientist",
-            points: [warriorScientist, ksh, sbh, scientistTrader],
+            points: [warriorKnightScientist, knightScientistHex, bardScientistHex, traderBardScientist],
             attributes: propertiesPerArchetype[Archetype.Scientist],
         }, {
             id: "wanderer",
-            points: [kzh, zeh, edh, dbh, sbh, ksh],
+            points: [knightZealotHex, ecologistZealotHex, ecologistDiplomatHex, bardDiplomatHex, bardScientistHex, knightScientistHex],
             attributes: propertiesPerArchetype[Archetype.Wanderer],
         }
     ];
