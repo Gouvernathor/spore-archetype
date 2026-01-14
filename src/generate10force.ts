@@ -100,35 +100,43 @@ function generatePolygons({
     const b: Point = [side, hauteur];
 
     /**
+     * This is a factor, proportional to the perimeter of the pure archetype areas.
+     * At 0, they are not visible.
+     * At 1/2, half archetypes are not visible.
+     * At another value than 1/3, half and tendency areas are not equal and the hexagon is not regular.
+     */
+    const pureSizeFactor = 1/3;
+
+    /**
      * The convergence point of the Warrior, Knight and Zealot areas.
      * Red Red Green
      */
-    const warriorKnightZealot = lerp(r, g, 1/3);
+    const warriorKnightZealot = lerp(r, g, pureSizeFactor);
     /**
      * The convergence point of the Shaman, Ecologist and Zealot areas.
      * Green Green Red
      */
-    const shamanEcologistZealot = lerp(r, g, 2/3);
+    const shamanEcologistZealot = lerp(g, r, pureSizeFactor);
     /**
      * The convergence point of the Warrior, Knight and Scientist areas.
      * Red Red Blue
      */
-    const warriorKnightScientist = lerp(r, b, 1/3);
+    const warriorKnightScientist = lerp(r, b, pureSizeFactor);
     /**
      * The convergence point of the Trader, Bard and Scientist areas.
      * Blue Blue Red
      */
-    const traderBardScientist = lerp(r, b, 2/3);
+    const traderBardScientist = lerp(b, r, pureSizeFactor);
     /**
      * The convergence point of the Shaman, Ecologist and Diplomat areas.
      * Green Green Blue
      */
-    const shamanEcologistDiplomat = lerp(g, b, 1/3);
+    const shamanEcologistDiplomat = lerp(g, b, pureSizeFactor);
     /**
      * The convergence point of the Trader, Bard and Diplomat areas.
      * Blue Blue Green
      */
-    const traderBardDiplomat = lerp(g, b, 2/3);
+    const traderBardDiplomat = lerp(b, g, pureSizeFactor);
 
     /** The center point of the hexagon and of the base triangle */
     const centerPoint: Point = [
