@@ -130,12 +130,24 @@ function generatePolygons({
      */
     const diplomatTrader = lerp(g, b, 2/3);
 
+    /** The center point of the hexagon and of the base triangle */
+    const centerPoint: Point = [
+        (r[0] + g[0] + b[0]) / 3,
+        (r[1] + g[1] + b[1]) / 3,
+    ];
+
     const doctoredFactor = (1 - hexfactor) / 2;
+    /** The convergence point between the Knight, the Zealot, and the central Wanderer hexagon */
     const kzh = lerp(warriorZealot, diplomatTrader, doctoredFactor);
+    /** The convergence point between the Ecologist, the Zealot, and the central Wanderer hexagon */
     const zeh = lerp(zealotShaman, scientistTrader, doctoredFactor);
+    /** The convergence point between the Ecologist, the Diplomat, and the central Wanderer hexagon */
     const edh = lerp(shamanDiplomat, warriorScientist, doctoredFactor);
+    /** The convergence point between the Bard, the Diplomat, and the central Wanderer hexagon */
     const dbh = lerp(diplomatTrader, warriorZealot, doctoredFactor);
+    /** The convergence point between the Bard, the Scientist, and the central Wanderer hexagon */
     const sbh = lerp(scientistTrader, zealotShaman, doctoredFactor);
+    /** The convergence point between the Knight, the Scientist, and the central Wanderer hexagon */
     const ksh = lerp(warriorScientist, shamanDiplomat, doctoredFactor);
 
     return [
