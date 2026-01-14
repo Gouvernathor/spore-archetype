@@ -11,17 +11,17 @@ if (!globalThis.document) {
             console.error("Failed to load jsdom or the document constant at load time : you need to set globalThis.document before generating SVGs in Node.js"));
 }
 
-type Config = {
-    side: number,
-    hexfactor: number,
-    propertiesPerArchetype: {[key in Archetype]?: {[key: string]: string}},
+interface Config {
+    readonly side: number,
+    readonly hexfactor: number,
+    readonly propertiesPerArchetype: { readonly [key in Archetype]?: { [key: string]: string } },
 };
 type Point = readonly [number, number];
 type Points = readonly Point[];
-type Polygon = {
-    id: string,
-    points: Points,
-    attributes?: {[attribute: string]: string}|undefined,
+interface Polygon {
+    readonly id: string,
+    readonly points: Points,
+    readonly attributes?: {[attribute: string]: string}|undefined,
 };
 
 function pointToString(point: Point) {
