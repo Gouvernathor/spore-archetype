@@ -1,8 +1,14 @@
 import { Archetype } from "./archetypes";
 
-let doc = globalThis.document;
-export function setDocument(document: Document) {
-    doc = document;
+/**
+ * Makes the document constant available, whether in a browser or in Node.js,
+ * without ever importing it in browser mode.
+ */
+if (!globalThis.document) {
+    await import("jsdom")
+        .then(m => globalThis.document = new m.JSDOM().window.document)
+        .catch(() =>
+            console.error("Failed to load jsdom or the document constant at load time : you need to set globalThis.document before generating SVGs in Node.js"));
 }
 
 type Config = {
@@ -25,6 +31,9 @@ function pointsToString(points: Points) {
     return points.map(pointToString).join(" ");
 }
 
+/**
+ * @param t when 0: returns a, when 1: returns b.
+ */
 function lerp(a: Point, b: Point, t: number): Point {
     return [a[0] + t * (b[0] - a[0]), a[1] + t * (b[1] - a[1])];
 }
@@ -36,18 +45,18 @@ export function generate10force(partial: Partial<Config> = {}): SVGSVGElement {
 
     const polygons = generatePolygons(config);
 
-    const svg = doc.createElementNS(SVG_NS, "svg");
+    const svg = document.createElementNS(SVG_NS, "svg");
     svg.setAttribute("xmlns", SVG_NS);
     svg.setAttribute("width", config.side.toString());
     svg.setAttribute("height", getHauteur(config.side).toString());
 
-    const g = svg.appendChild(doc.createElementNS(SVG_NS, "g"));
+    const g = svg.appendChild(document.createElementNS(SVG_NS, "g"));
     g.setAttribute("stroke", "black");
     g.setAttribute("stroke-width", "1");
     g.setAttribute("fill", "none");
 
     for (const polygon of polygons) {
-        const svgPolygon = g.appendChild(doc.createElementNS(SVG_NS, "polygon"));
+        const svgPolygon = g.appendChild(document.createElementNS(SVG_NS, "polygon"));
         svgPolygon.setAttribute("id", polygon.id);
         svgPolygon.setAttribute("points", pointsToString(polygon.points));
         if (polygon.attributes) {

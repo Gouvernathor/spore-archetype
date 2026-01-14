@@ -43,7 +43,12 @@
     "typescript": "*",
     "vitest": "^4.0.17"
   },
-  "optionalDependencies": {
+  "peerDependencies": {
     "jsdom": "^27.4.0"
+},
+  "peerDependenciesMeta": {
+    "jsdom": {
+      "optional": true
+    }
   }
 }
