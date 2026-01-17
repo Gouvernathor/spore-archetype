@@ -29,6 +29,7 @@ type Points = readonly Point[];
 interface Polygon {
     readonly class?: string,
     readonly points: Points,
+    readonly fill?: [string, string]|string;
     readonly attributes?: {[attribute: string]: string}|undefined,
 };
 
@@ -69,6 +70,13 @@ export function generate10force(partial: Partial<Config> = {}): SVGSVGElement {
             svgPolygon.classList = polygon.class;
         }
         svgPolygon.setAttribute("points", pointsToString(polygon.points));
+        let fill = polygon.fill;
+        if (fill) {
+            if (typeof fill !== "string") {
+                fill = `var(${fill[0]}, ${fill[1]})`;
+            }
+            svgPolygon.setAttribute("fill", fill);
+        }
         if (polygon.attributes) {
             for (const [attribute, value] of Object.entries(polygon.attributes)) {
                 svgPolygon.setAttribute(attribute, value);
