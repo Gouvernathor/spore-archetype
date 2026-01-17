@@ -27,7 +27,7 @@ interface Config {
 type Point = readonly [number, number];
 type Points = readonly Point[];
 interface Polygon {
-    readonly id: string,
+    readonly class?: string,
     readonly points: Points,
     readonly attributes?: {[attribute: string]: string}|undefined,
 };
@@ -65,7 +65,9 @@ export function generate10force(partial: Partial<Config> = {}): SVGSVGElement {
 
     for (const polygon of polygons) {
         const svgPolygon = g.appendChild(document.createElementNS(SVG_NS, "polygon"));
-        svgPolygon.setAttribute("id", polygon.id);
+        if (polygon.class) {
+            svgPolygon.classList = polygon.class;
+        }
         svgPolygon.setAttribute("points", pointsToString(polygon.points));
         if (polygon.attributes) {
             for (const [attribute, value] of Object.entries(polygon.attributes)) {
@@ -158,46 +160,46 @@ function generatePolygons({
     const knightScientistHex = lerp(centerPoint, warriorKnightScientist, hexfactor);
 
     return [{
-    //     id: "base",
+    //     class: "base",
     //     points: [r, g, b],
     // }, {
-        id: "warrior",
+        class: "warrior",
         points: [r, warriorKnightZealot, warriorKnightScientist],
         attributes: propertiesPerArchetype[Archetype.Warrior],
     }, {
-        id: "shaman",
+        class: "shaman",
         points: [shamanEcologistZealot, g, shamanEcologistDiplomat],
         attributes: propertiesPerArchetype[Archetype.Shaman],
     }, {
-        id: "trader",
+        class: "trader",
         points: [traderBardScientist, traderBardDiplomat, b],
         attributes: propertiesPerArchetype[Archetype.Trader],
     }, {
-        id: "knight",
+        class: "knight",
         points: [warriorKnightZealot, knightZealotHex, knightScientistHex, warriorKnightScientist],
         attributes: propertiesPerArchetype[Archetype.Knight],
     }, {
-        id: "zealot",
+        class: "zealot",
         points: [warriorKnightZealot, shamanEcologistZealot, ecologistZealotHex, knightZealotHex],
         attributes: propertiesPerArchetype[Archetype.Zealot],
     }, {
-        id: "ecologist",
+        class: "ecologist",
         points: [shamanEcologistZealot, shamanEcologistDiplomat, ecologistDiplomatHex, ecologistZealotHex],
         attributes: propertiesPerArchetype[Archetype.Ecologist],
     }, {
-        id: "diplomat",
+        class: "diplomat",
         points: [ecologistDiplomatHex, shamanEcologistDiplomat, traderBardDiplomat, bardDiplomatHex],
         attributes: propertiesPerArchetype[Archetype.Diplomat],
     }, {
-        id: "bard",
+        class: "bard",
         points: [bardScientistHex, bardDiplomatHex, traderBardDiplomat, traderBardScientist],
         attributes: propertiesPerArchetype[Archetype.Bard],
     }, {
-        id: "scientist",
+        class: "scientist",
         points: [warriorKnightScientist, knightScientistHex, bardScientistHex, traderBardScientist],
         attributes: propertiesPerArchetype[Archetype.Scientist],
     }, {
-        id: "wanderer",
+        class: "wanderer",
         points: [knightZealotHex, ecologistZealotHex, ecologistDiplomatHex, bardDiplomatHex, bardScientistHex, knightScientistHex],
         attributes: propertiesPerArchetype[Archetype.Wanderer],
     }];
