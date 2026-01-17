@@ -1,4 +1,5 @@
 import { Archetype } from "./archetypes/index.js";
+import { archetypeCSSColors } from "./display.js";
 
 /**
  * Makes the document constant available, whether in a browser or in Node.js,
@@ -173,42 +174,52 @@ function generatePolygons({
     // }, {
         class: "warrior",
         points: [r, warriorKnightZealot, warriorKnightScientist],
+        fill: ["--archetype-color-warrior", archetypeCSSColors[Archetype.Warrior]],
         attributes: propertiesPerArchetype[Archetype.Warrior],
     }, {
         class: "shaman",
         points: [shamanEcologistZealot, g, shamanEcologistDiplomat],
+        fill: ["--archetype-color-shaman", archetypeCSSColors[Archetype.Shaman]],
         attributes: propertiesPerArchetype[Archetype.Shaman],
     }, {
         class: "trader",
         points: [traderBardScientist, traderBardDiplomat, b],
+        fill: ["--archetype-color-trader", archetypeCSSColors[Archetype.Trader]],
         attributes: propertiesPerArchetype[Archetype.Trader],
     }, {
         class: "knight",
         points: [warriorKnightZealot, knightZealotHex, knightScientistHex, warriorKnightScientist],
+        fill: ["--archetype-color-knight", archetypeCSSColors[Archetype.Knight]],
         attributes: propertiesPerArchetype[Archetype.Knight],
     }, {
         class: "zealot",
         points: [warriorKnightZealot, shamanEcologistZealot, ecologistZealotHex, knightZealotHex],
+        fill: ["--archetype-color-zealot", archetypeCSSColors[Archetype.Zealot]],
         attributes: propertiesPerArchetype[Archetype.Zealot],
     }, {
         class: "ecologist",
         points: [shamanEcologistZealot, shamanEcologistDiplomat, ecologistDiplomatHex, ecologistZealotHex],
+        fill: ["--archetype-color-ecologist", archetypeCSSColors[Archetype.Ecologist]],
         attributes: propertiesPerArchetype[Archetype.Ecologist],
     }, {
         class: "diplomat",
         points: [ecologistDiplomatHex, shamanEcologistDiplomat, traderBardDiplomat, bardDiplomatHex],
+        fill: ["--archetype-color-diplomat", archetypeCSSColors[Archetype.Diplomat]],
         attributes: propertiesPerArchetype[Archetype.Diplomat],
     }, {
         class: "bard",
         points: [bardScientistHex, bardDiplomatHex, traderBardDiplomat, traderBardScientist],
+        fill: ["--archetype-color-bard", archetypeCSSColors[Archetype.Bard]],
         attributes: propertiesPerArchetype[Archetype.Bard],
     }, {
         class: "scientist",
         points: [warriorKnightScientist, knightScientistHex, bardScientistHex, traderBardScientist],
+        fill: ["--archetype-color-scientist", archetypeCSSColors[Archetype.Scientist]],
         attributes: propertiesPerArchetype[Archetype.Scientist],
     }, {
         class: "wanderer",
         points: [knightZealotHex, ecologistZealotHex, ecologistDiplomatHex, bardDiplomatHex, bardScientistHex, knightScientistHex],
+        fill: ["--archetype-color-wanderer", archetypeCSSColors[Archetype.Wanderer]],
         attributes: propertiesPerArchetype[Archetype.Wanderer],
     }];
 }
