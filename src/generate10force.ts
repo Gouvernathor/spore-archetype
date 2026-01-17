@@ -34,6 +34,16 @@ interface Config {
 
     readonly propertiesPerArchetype: { readonly [key in Archetype]?: { [key: string]: string } },
 };
+/** Preset such that the hexagon is regular,
+ * and the shapes of tendency and half archetype areas are all the same. */
+export const REGULAR_CONFIG: Partial<Config> = {
+    pureTriangleFactor: 1/3,
+};
+export const ALL_EQUAL_CONFIG: Partial<Config> = {
+    pureTriangleFactor: Math.sqrt(1/10),
+    // hexfactor: ???,
+};
+
 type Point = readonly [number, number];
 type Points = readonly Point[];
 interface Polygon {
