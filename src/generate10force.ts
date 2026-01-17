@@ -157,52 +157,50 @@ function generatePolygons({
     /** The convergence point between the Knight, the Scientist, and the central Wanderer hexagon */
     const knightScientistHex = lerp(centerPoint, warriorKnightScientist, hexfactor);
 
-    return [
-        {
-        //     id: "base",
-        //     points: [r, g, b],
-        // }, {
-            id: "warrior",
-            points: [r, warriorKnightZealot, warriorKnightScientist],
-            attributes: propertiesPerArchetype[Archetype.Warrior],
-        }, {
-            id: "shaman",
-            points: [shamanEcologistZealot, g, shamanEcologistDiplomat],
-            attributes: propertiesPerArchetype[Archetype.Shaman],
-        }, {
-            id: "trader",
-            points: [traderBardScientist, traderBardDiplomat, b],
-            attributes: propertiesPerArchetype[Archetype.Trader],
-        }, {
-            id: "knight",
-            points: [warriorKnightZealot, knightZealotHex, knightScientistHex, warriorKnightScientist],
-            attributes: propertiesPerArchetype[Archetype.Knight],
-        }, {
-            id: "zealot",
-            points: [warriorKnightZealot, shamanEcologistZealot, ecologistZealotHex, knightZealotHex],
-            attributes: propertiesPerArchetype[Archetype.Zealot],
-        }, {
-            id: "ecologist",
-            points: [shamanEcologistZealot, shamanEcologistDiplomat, ecologistDiplomatHex, ecologistZealotHex],
-            attributes: propertiesPerArchetype[Archetype.Ecologist],
-        }, {
-            id: "diplomat",
-            points: [ecologistDiplomatHex, shamanEcologistDiplomat, traderBardDiplomat, bardDiplomatHex],
-            attributes: propertiesPerArchetype[Archetype.Diplomat],
-        }, {
-            id: "bard",
-            points: [bardScientistHex, bardDiplomatHex, traderBardDiplomat, traderBardScientist],
-            attributes: propertiesPerArchetype[Archetype.Bard],
-        }, {
-            id: "scientist",
-            points: [warriorKnightScientist, knightScientistHex, bardScientistHex, traderBardScientist],
-            attributes: propertiesPerArchetype[Archetype.Scientist],
-        }, {
-            id: "wanderer",
-            points: [knightZealotHex, ecologistZealotHex, ecologistDiplomatHex, bardDiplomatHex, bardScientistHex, knightScientistHex],
-            attributes: propertiesPerArchetype[Archetype.Wanderer],
-        }
-    ];
+    return [{
+    //     id: "base",
+    //     points: [r, g, b],
+    // }, {
+        id: "warrior",
+        points: [r, warriorKnightZealot, warriorKnightScientist],
+        attributes: propertiesPerArchetype[Archetype.Warrior],
+    }, {
+        id: "shaman",
+        points: [shamanEcologistZealot, g, shamanEcologistDiplomat],
+        attributes: propertiesPerArchetype[Archetype.Shaman],
+    }, {
+        id: "trader",
+        points: [traderBardScientist, traderBardDiplomat, b],
+        attributes: propertiesPerArchetype[Archetype.Trader],
+    }, {
+        id: "knight",
+        points: [warriorKnightZealot, knightZealotHex, knightScientistHex, warriorKnightScientist],
+        attributes: propertiesPerArchetype[Archetype.Knight],
+    }, {
+        id: "zealot",
+        points: [warriorKnightZealot, shamanEcologistZealot, ecologistZealotHex, knightZealotHex],
+        attributes: propertiesPerArchetype[Archetype.Zealot],
+    }, {
+        id: "ecologist",
+        points: [shamanEcologistZealot, shamanEcologistDiplomat, ecologistDiplomatHex, ecologistZealotHex],
+        attributes: propertiesPerArchetype[Archetype.Ecologist],
+    }, {
+        id: "diplomat",
+        points: [ecologistDiplomatHex, shamanEcologistDiplomat, traderBardDiplomat, bardDiplomatHex],
+        attributes: propertiesPerArchetype[Archetype.Diplomat],
+    }, {
+        id: "bard",
+        points: [bardScientistHex, bardDiplomatHex, traderBardDiplomat, traderBardScientist],
+        attributes: propertiesPerArchetype[Archetype.Bard],
+    }, {
+        id: "scientist",
+        points: [warriorKnightScientist, knightScientistHex, bardScientistHex, traderBardScientist],
+        attributes: propertiesPerArchetype[Archetype.Scientist],
+    }, {
+        id: "wanderer",
+        points: [knightZealotHex, ecologistZealotHex, ecologistDiplomatHex, bardDiplomatHex, bardScientistHex, knightScientistHex],
+        attributes: propertiesPerArchetype[Archetype.Wanderer],
+    }];
 }
 
 function getHauteur(side: number) {
