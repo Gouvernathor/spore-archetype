@@ -32,6 +32,6 @@ export function getArchetype(
     }
 
     const counter = getCounter(sequence);
-    return getWanderer(counter) || getPure(sequence, counter) || getTendency(counter) || getHalf(counter);
+    return getWanderer(counter) ?? getPure(sequence, counter) ?? getTendency(counter) ?? getHalf(counter);
 }
 export default getArchetype;
