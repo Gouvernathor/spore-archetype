@@ -159,9 +159,9 @@ function generatePolygons({
 
     return [
         {
-            id: "base",
-            points: [r, g, b],
-        }, {
+        //     id: "base",
+        //     points: [r, g, b],
+        // }, {
             id: "warrior",
             points: [r, warriorKnightZealot, warriorKnightScientist],
             attributes: propertiesPerArchetype[Archetype.Warrior],
