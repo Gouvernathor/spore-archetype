@@ -30,7 +30,7 @@ interface Config {
      * At 0, there is no center hexagon.
      * At 1, all 6 non-pure archetypes have no room to be displayed.
      */
-    readonly hexfactor: number,
+    readonly hexFactor: number,
 
     readonly propertiesPerArchetype: { readonly [key in Archetype]?: { [key: string]: string } },
 };
@@ -121,16 +121,16 @@ export function generate10force(partial: Partial<Config> = {}): SVGSVGElement {
 function getConfig({
     side = 800,
     pureTriangleFactor = 1/3,
-    hexfactor = 1/3,
+    hexFactor = 1/3,
     propertiesPerArchetype = {},
 }: Partial<Config>): Config {
-    return {side, pureTriangleFactor, hexfactor, propertiesPerArchetype};
+    return {side, pureTriangleFactor, hexFactor, propertiesPerArchetype};
 }
 
 function generatePolygons({
     side,
     pureTriangleFactor,
-    hexfactor,
+    hexFactor,
     propertiesPerArchetype,
 }: Config): Polygon[] {
     const hauteur = getHauteur(side);
@@ -180,17 +180,17 @@ function generatePolygons({
     ];
 
     /** The convergence point between the Knight, the Zealot, and the central Wanderer hexagon */
-    const knightZealotHex = lerp(centerPoint, warriorKnightZealot, hexfactor);
+    const knightZealotHex = lerp(centerPoint, warriorKnightZealot, hexFactor);
     /** The convergence point between the Ecologist, the Zealot, and the central Wanderer hexagon */
-    const ecologistZealotHex = lerp(centerPoint, shamanEcologistZealot, hexfactor);
+    const ecologistZealotHex = lerp(centerPoint, shamanEcologistZealot, hexFactor);
     /** The convergence point between the Ecologist, the Diplomat, and the central Wanderer hexagon */
-    const ecologistDiplomatHex = lerp(centerPoint, shamanEcologistDiplomat, hexfactor);
+    const ecologistDiplomatHex = lerp(centerPoint, shamanEcologistDiplomat, hexFactor);
     /** The convergence point between the Bard, the Diplomat, and the central Wanderer hexagon */
-    const bardDiplomatHex = lerp(centerPoint, traderBardDiplomat, hexfactor);
+    const bardDiplomatHex = lerp(centerPoint, traderBardDiplomat, hexFactor);
     /** The convergence point between the Bard, the Scientist, and the central Wanderer hexagon */
-    const bardScientistHex = lerp(centerPoint, traderBardScientist, hexfactor);
+    const bardScientistHex = lerp(centerPoint, traderBardScientist, hexFactor);
     /** The convergence point between the Knight, the Scientist, and the central Wanderer hexagon */
-    const knightScientistHex = lerp(centerPoint, warriorKnightScientist, hexfactor);
+    const knightScientistHex = lerp(centerPoint, warriorKnightScientist, hexFactor);
 
     return [{
     //     class: "base",
