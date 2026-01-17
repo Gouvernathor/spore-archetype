@@ -54,7 +54,12 @@ type Points = readonly Point[];
 interface Polygon {
     readonly class?: string,
     readonly points: Points,
-    readonly fill?: [string, string]|string;
+    /**
+     * Either a color,
+     * or a pair made of a CSS variable name and a default color,
+     * or the same without a default color.
+     */
+    readonly fill?: string|[string]|[string, string];
     readonly attributes?: {[attribute: string]: string}|undefined,
 };
 
@@ -98,7 +103,8 @@ export function generate10force(partial: Partial<Config> = {}): SVGSVGElement {
         let fill = polygon.fill;
         if (fill) {
             if (typeof fill !== "string") {
-                fill = `var(${fill[0]}, ${fill[1]})`;
+                // the elements, no square brackets, separated by a comma if needed
+                fill = `var(${fill})`;
             }
             svgPolygon.setAttribute("fill", fill);
         }
