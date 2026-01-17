@@ -17,6 +17,15 @@ interface Config {
     readonly side: number,
 
     /**
+     * This is the ratio of the size of a side of the triangle of a pure archetype
+     * over the side of the overall triangle.
+     * Between 0 (pure archetypes not visible) and 1/2.
+     * At another value than 1/3, half and tendency areas are not equal and the hexagon is not regular.
+     * At another value than √(1/10), some areas will always be a different area than the pure triangles.
+     */
+    readonly pureTriangleFactor: number,
+
+    /**
      * This is a factor, proportional to the perimeter of the center hexagon.
      * At 0, there is no center hexagon.
      * At 1, all 6 non-pure archetypes have no room to be displayed.
@@ -90,14 +99,16 @@ export function generate10force(partial: Partial<Config> = {}): SVGSVGElement {
 
 function getConfig({
     side = 800,
+    pureTriangleFactor = 1/3,
     hexfactor = 1/3,
     propertiesPerArchetype = {},
 }: Partial<Config>): Config {
-    return {side, hexfactor, propertiesPerArchetype};
+    return {side, pureTriangleFactor, hexfactor, propertiesPerArchetype};
 }
 
 function generatePolygons({
     side,
+    pureTriangleFactor,
     hexfactor,
     propertiesPerArchetype,
 }: Config): Polygon[] {
@@ -111,43 +122,35 @@ function generatePolygons({
     const b: Point = [side, hauteur];
 
     /**
-     * This is a factor, proportional to the perimeter of the pure archetype areas.
-     * At 0, they are not visible.
-     * At 1/2, half archetypes are not visible.
-     * At another value than 1/3, half and tendency areas are not equal and the hexagon is not regular.
-     */
-    const pureSizeFactor = 1/3;
-
-    /**
      * The convergence point of the Warrior, Knight and Zealot areas.
      * Red Red Green
      */
-    const warriorKnightZealot = lerp(r, g, pureSizeFactor);
+    const warriorKnightZealot = lerp(r, g, pureTriangleFactor);
     /**
      * The convergence point of the Shaman, Ecologist and Zealot areas.
      * Green Green Red
      */
-    const shamanEcologistZealot = lerp(g, r, pureSizeFactor);
+    const shamanEcologistZealot = lerp(g, r, pureTriangleFactor);
     /**
      * The convergence point of the Warrior, Knight and Scientist areas.
      * Red Red Blue
      */
-    const warriorKnightScientist = lerp(r, b, pureSizeFactor);
+    const warriorKnightScientist = lerp(r, b, pureTriangleFactor);
     /**
      * The convergence point of the Trader, Bard and Scientist areas.
      * Blue Blue Red
      */
-    const traderBardScientist = lerp(b, r, pureSizeFactor);
+    const traderBardScientist = lerp(b, r, pureTriangleFactor);
     /**
      * The convergence point of the Shaman, Ecologist and Diplomat areas.
      * Green Green Blue
      */
-    const shamanEcologistDiplomat = lerp(g, b, pureSizeFactor);
+    const shamanEcologistDiplomat = lerp(g, b, pureTriangleFactor);
     /**
      * The convergence point of the Trader, Bard and Diplomat areas.
      * Blue Blue Green
      */
-    const traderBardDiplomat = lerp(b, g, pureSizeFactor);
+    const traderBardDiplomat = lerp(b, g, pureTriangleFactor);
 
     /** The center point of the hexagon and of the base triangle */
     const centerPoint: Point = [
