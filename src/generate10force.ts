@@ -103,6 +103,7 @@ export function generate10force(partial: Partial<Config> = {}): SVGSVGElement {
     const g = svg.appendChild(document.createElementNS(SVG_NS, "g"));
     g.setAttribute("stroke", "black");
     g.setAttribute("stroke-width", config.borderWidth.toString());
+    g.setAttribute("stroke-linejoin", "round");
     g.setAttribute("fill", "none");
 
     for (const polygon of polygons) {
