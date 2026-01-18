@@ -97,9 +97,8 @@ export function generate10force(partial: Partial<Config> = {}): SVGSVGElement {
 
     const svg = document.createElementNS(SVG_NS, "svg");
     svg.setAttribute("xmlns", SVG_NS);
-    svg.setAttribute("width", config.side.toString());
-    svg.setAttribute("height", getHauteur(config.side).toString());
-    // TODO implement the margin
+    svg.setAttribute("viewBox",
+        `${-config.margin} ${-config.margin} ${config.side+2*config.margin} ${getHauteur(config.side)+2*config.margin}`);
 
     const g = svg.appendChild(document.createElementNS(SVG_NS, "g"));
     g.setAttribute("stroke", "black");
