@@ -14,7 +14,7 @@ if (!globalThis.document) {
 
 interface Config {
     /** The size of a side of the big triangle. */
-    readonly side: number,
+    readonly side: number;
 
     /**
      * This is the ratio of the size of a side of the triangle of a pure archetype
@@ -23,16 +23,27 @@ interface Config {
      * At another value than 1/3, half and tendency areas are not equal and the hexagon is not regular.
      * At another value than √(1/10), some areas will always be a different area than the pure triangles.
      */
-    readonly pureTriangleFactor: number,
+    readonly pureTriangleFactor: number;
 
     /**
      * This is a factor, proportional to the perimeter of the center hexagon.
      * At 0, there is no center hexagon.
      * At 1, all 6 non-pure archetypes have no room to be displayed.
      */
-    readonly hexFactor: number,
+    readonly hexFactor: number;
 
-    readonly propertiesPerArchetype: { readonly [key in Archetype]?: { [key: string]: string } },
+    /**
+     * The size of the border around areas, in pixels.
+     */
+    readonly borderWidth: number;
+
+    /**
+     * A small gap around the triangle, so that the border is not cut out.
+     * Defaults to just enough.
+     */
+    readonly margin: number;
+
+    readonly propertiesPerArchetype: { readonly [key in Archetype]?: { [key: string]: string } };
 };
 /**
  * Preset such that the hexagon is regular,
@@ -88,10 +99,11 @@ export function generate10force(partial: Partial<Config> = {}): SVGSVGElement {
     svg.setAttribute("xmlns", SVG_NS);
     svg.setAttribute("width", config.side.toString());
     svg.setAttribute("height", getHauteur(config.side).toString());
+    // TODO implement the margin
 
     const g = svg.appendChild(document.createElementNS(SVG_NS, "g"));
     g.setAttribute("stroke", "black");
-    g.setAttribute("stroke-width", "1");
+    g.setAttribute("stroke-width", config.borderWidth.toString());
     g.setAttribute("fill", "none");
 
     for (const polygon of polygons) {
@@ -122,9 +134,11 @@ function getConfig({
     side = 800,
     pureTriangleFactor = 1/3,
     hexFactor = 1/3,
+    borderWidth = 1,
+    margin = borderWidth/2,
     propertiesPerArchetype = {},
 }: Partial<Config>): Config {
-    return {side, pureTriangleFactor, hexFactor, propertiesPerArchetype};
+    return {side, pureTriangleFactor, hexFactor, borderWidth, margin, propertiesPerArchetype};
 }
 
 function generatePolygons({
