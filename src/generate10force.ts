@@ -262,6 +262,20 @@ function generatePolygons({
     }];
 }
 
+function generatePolygon(
+    archetype: Archetype,
+    points: Points,
+    { propertiesPerArchetype }: Pick<Config, "propertiesPerArchetype">,
+): Polygon {
+    const id = Archetype[archetype].toLowerCase();
+    return {
+        class: id,
+        points,
+        fill: [`--archetype-color-${id}`, archetypeCSSColors[archetype]],
+        attributes: propertiesPerArchetype[archetype],
+    };
+}
+
 function getHauteur(side: number) {
     return Math.sqrt(3) / 2 * side;
 }
