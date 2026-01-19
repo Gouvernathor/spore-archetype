@@ -206,60 +206,48 @@ function generatePolygons({
     /** The convergence point between the Knight, the Scientist, and the central Wanderer hexagon */
     const knightScientistHex = lerp(centerPoint, warriorKnightScientist, hexFactor);
 
-    return [{
-    //     class: "base",
-    //     points: [r, g, b],
-    // }, {
-        class: Archetype[Archetype.Warrior].toLowerCase(),
-        points: [r, warriorKnightZealot, warriorKnightScientist],
-        fill: ["--archetype-color-warrior", archetypeCSSColors[Archetype.Warrior]],
-        attributes: propertiesPerArchetype[Archetype.Warrior],
-    }, {
-        class: Archetype[Archetype.Shaman].toLowerCase(),
-        points: [shamanEcologistZealot, g, shamanEcologistDiplomat],
-        fill: ["--archetype-color-shaman", archetypeCSSColors[Archetype.Shaman]],
-        attributes: propertiesPerArchetype[Archetype.Shaman],
-    }, {
-        class: Archetype[Archetype.Trader].toLowerCase(),
-        points: [traderBardScientist, traderBardDiplomat, b],
-        fill: ["--archetype-color-trader", archetypeCSSColors[Archetype.Trader]],
-        attributes: propertiesPerArchetype[Archetype.Trader],
-    }, {
-        class: Archetype[Archetype.Knight].toLowerCase(),
-        points: [warriorKnightZealot, knightZealotHex, knightScientistHex, warriorKnightScientist],
-        fill: ["--archetype-color-knight", archetypeCSSColors[Archetype.Knight]],
-        attributes: propertiesPerArchetype[Archetype.Knight],
-    }, {
-        class: Archetype[Archetype.Zealot].toLowerCase(),
-        points: [warriorKnightZealot, shamanEcologistZealot, ecologistZealotHex, knightZealotHex],
-        fill: ["--archetype-color-zealot", archetypeCSSColors[Archetype.Zealot]],
-        attributes: propertiesPerArchetype[Archetype.Zealot],
-    }, {
-        class: Archetype[Archetype.Ecologist].toLowerCase(),
-        points: [shamanEcologistZealot, shamanEcologistDiplomat, ecologistDiplomatHex, ecologistZealotHex],
-        fill: ["--archetype-color-ecologist", archetypeCSSColors[Archetype.Ecologist]],
-        attributes: propertiesPerArchetype[Archetype.Ecologist],
-    }, {
-        class: Archetype[Archetype.Diplomat].toLowerCase(),
-        points: [ecologistDiplomatHex, shamanEcologistDiplomat, traderBardDiplomat, bardDiplomatHex],
-        fill: ["--archetype-color-diplomat", archetypeCSSColors[Archetype.Diplomat]],
-        attributes: propertiesPerArchetype[Archetype.Diplomat],
-    }, {
-        class: Archetype[Archetype.Bard].toLowerCase(),
-        points: [bardScientistHex, bardDiplomatHex, traderBardDiplomat, traderBardScientist],
-        fill: ["--archetype-color-bard", archetypeCSSColors[Archetype.Bard]],
-        attributes: propertiesPerArchetype[Archetype.Bard],
-    }, {
-        class: Archetype[Archetype.Scientist].toLowerCase(),
-        points: [warriorKnightScientist, knightScientistHex, bardScientistHex, traderBardScientist],
-        fill: ["--archetype-color-scientist", archetypeCSSColors[Archetype.Scientist]],
-        attributes: propertiesPerArchetype[Archetype.Scientist],
-    }, {
-        class: Archetype[Archetype.Wanderer].toLowerCase(),
-        points: [knightZealotHex, ecologistZealotHex, ecologistDiplomatHex, bardDiplomatHex, bardScientistHex, knightScientistHex],
-        fill: ["--archetype-color-wanderer", archetypeCSSColors[Archetype.Wanderer]],
-        attributes: propertiesPerArchetype[Archetype.Wanderer],
-    }];
+    return [
+        generatePolygon(
+            Archetype.Warrior,
+            [r, warriorKnightZealot, warriorKnightScientist],
+            { propertiesPerArchetype }),
+        generatePolygon(
+            Archetype.Shaman,
+            [shamanEcologistZealot, g, shamanEcologistDiplomat],
+            { propertiesPerArchetype }),
+        generatePolygon(
+            Archetype.Trader,
+            [traderBardScientist, traderBardDiplomat, b],
+            { propertiesPerArchetype }),
+        generatePolygon(
+            Archetype.Knight,
+            [warriorKnightZealot, knightZealotHex, knightScientistHex, warriorKnightScientist],
+            { propertiesPerArchetype }),
+        generatePolygon(
+            Archetype.Zealot,
+            [warriorKnightZealot, shamanEcologistZealot, ecologistZealotHex, knightZealotHex],
+            { propertiesPerArchetype }),
+        generatePolygon(
+            Archetype.Ecologist,
+            [shamanEcologistZealot, shamanEcologistDiplomat, ecologistDiplomatHex, ecologistZealotHex],
+            { propertiesPerArchetype }),
+        generatePolygon(
+            Archetype.Diplomat,
+            [ecologistDiplomatHex, shamanEcologistDiplomat, traderBardDiplomat, bardDiplomatHex],
+            { propertiesPerArchetype }),
+        generatePolygon(
+            Archetype.Bard,
+            [bardScientistHex, bardDiplomatHex, traderBardDiplomat, traderBardScientist],
+            { propertiesPerArchetype }),
+        generatePolygon(
+            Archetype.Scientist,
+            [warriorKnightScientist, knightScientistHex, bardScientistHex, traderBardScientist],
+            { propertiesPerArchetype }),
+        generatePolygon(
+            Archetype.Wanderer,
+            [knightZealotHex, ecologistZealotHex, ecologistDiplomatHex, bardDiplomatHex, bardScientistHex, knightScientistHex],
+            { propertiesPerArchetype }),
+    ];
 }
 
 function generatePolygon(
