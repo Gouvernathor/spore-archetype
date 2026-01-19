@@ -210,50 +210,50 @@ function generatePolygons({
         generatePolygon(
             Archetype.Warrior,
             [r, warriorKnightZealot, warriorKnightScientist],
-            { propertiesPerArchetype }),
+            propertiesPerArchetype),
         generatePolygon(
             Archetype.Shaman,
             [shamanEcologistZealot, g, shamanEcologistDiplomat],
-            { propertiesPerArchetype }),
+            propertiesPerArchetype),
         generatePolygon(
             Archetype.Trader,
             [traderBardScientist, traderBardDiplomat, b],
-            { propertiesPerArchetype }),
+            propertiesPerArchetype),
         generatePolygon(
             Archetype.Knight,
             [warriorKnightZealot, knightZealotHex, knightScientistHex, warriorKnightScientist],
-            { propertiesPerArchetype }),
+            propertiesPerArchetype),
         generatePolygon(
             Archetype.Zealot,
             [warriorKnightZealot, shamanEcologistZealot, ecologistZealotHex, knightZealotHex],
-            { propertiesPerArchetype }),
+            propertiesPerArchetype),
         generatePolygon(
             Archetype.Ecologist,
             [shamanEcologistZealot, shamanEcologistDiplomat, ecologistDiplomatHex, ecologistZealotHex],
-            { propertiesPerArchetype }),
+            propertiesPerArchetype),
         generatePolygon(
             Archetype.Diplomat,
             [ecologistDiplomatHex, shamanEcologistDiplomat, traderBardDiplomat, bardDiplomatHex],
-            { propertiesPerArchetype }),
+            propertiesPerArchetype),
         generatePolygon(
             Archetype.Bard,
             [bardScientistHex, bardDiplomatHex, traderBardDiplomat, traderBardScientist],
-            { propertiesPerArchetype }),
+            propertiesPerArchetype),
         generatePolygon(
             Archetype.Scientist,
             [warriorKnightScientist, knightScientistHex, bardScientistHex, traderBardScientist],
-            { propertiesPerArchetype }),
+            propertiesPerArchetype),
         generatePolygon(
             Archetype.Wanderer,
             [knightZealotHex, ecologistZealotHex, ecologistDiplomatHex, bardDiplomatHex, bardScientistHex, knightScientistHex],
-            { propertiesPerArchetype }),
+            propertiesPerArchetype),
     ];
 }
 
 function generatePolygon(
     archetype: Archetype,
     points: Points,
-    { propertiesPerArchetype }: Pick<Config, "propertiesPerArchetype">,
+    propertiesPerArchetype: Config["propertiesPerArchetype"],
 ): Polygon {
     const id = Archetype[archetype].toLowerCase();
     return {
