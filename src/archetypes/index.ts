@@ -4,6 +4,7 @@ import { getHalf, getPure, getTendency, getWanderer } from "./specific.js";
 
 export { Archetype } from "./base.js";
 export { generateAllValidSequences, Sequence } from "./sequence.js";
+export { ArchetypeConsequence } from "./consequences.js";
 
 /**
  * if you have three of the same color, or all of the same color, you are pure of that color
