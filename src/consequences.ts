@@ -156,3 +156,9 @@ export function getConsequencesOfCard(
 export function getConsequencesOfCard(color: number, era: Era) {
     return Array(Era.Space-era).fill(3*era + color);
 }
+
+export function getOriginEraOfConsequence(
+    consequence: Consequence,
+): Exclude<Era, Era.Space> {
+    return Math.floor((consequence - 1) / 3);
+}
