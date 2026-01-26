@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { Era } from "../src/eras";
 import { CellCard, CivilizationCard, CreatureCard, TribalCard } from "../src/cards";
-import { cellCardConsequences, civilizationCardConsequences, CivilizationConsequence, creatureCardConsequences, CreatureConsequence, getConsequencesOfCard, getOriginEraOfConsequence, SpaceConsequence, tribalCardConsequences, TribalConsequence } from "../src/consequences";
+import { cellCardConsequences, civilizationCardConsequences, CivilizationConsequence, creatureCardConsequences, CreatureConsequence, getColorOfConsequence, getConsequencesOfCard, getOriginEraOfConsequence, SpaceConsequence, tribalCardConsequences, TribalConsequence } from "../src/consequences";
 import { Archetype } from "../src/archetypes";
 
 describe("consistency of runtime checks with typing", () => {
@@ -114,5 +114,23 @@ describe("consequence origin era", () => {
             .toBe(Era.Civilization);
         expect(getOriginEraOfConsequence(SpaceConsequence.SpiceSavant))
             .toBe(Era.Civilization);
+    });
+});
+
+describe("consequence origin card", () => {
+    it("gives a color consistent with the indexed objects", () => {
+        for (const indexedObject of [
+            cellCardConsequences,
+            creatureCardConsequences,
+            tribalCardConsequences,
+            civilizationCardConsequences,
+        ]) {
+            for (const [card, consequences] of Object.entries(indexedObject)) {
+                for (const consequence of consequences) {
+                    expect(getColorOfConsequence(consequence))
+                        .toBe(+card);
+                }
+            }
+        }
     });
 });

@@ -1,5 +1,5 @@
 import { Archetype } from "./archetypes";
-import { CellCard, CivilizationCard, CreatureCard, TribalCard } from "./cards.js";
+import { CardColor, CellCard, CivilizationCard, CreatureCard, TribalCard } from "./cards.js";
 import { Era } from "./eras.js";
 
 export enum CreatureConsequence {
@@ -161,4 +161,10 @@ export function getOriginEraOfConsequence(
     consequence: Consequence,
 ): Exclude<Era, Era.Space> {
     return Math.floor((consequence - 1) / 3);
+}
+
+export function getColorOfConsequence(
+    consequence: Consequence,
+): CardColor {
+    return ((consequence - 1) % 3) + 1;
 }
