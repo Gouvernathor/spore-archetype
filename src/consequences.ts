@@ -1,4 +1,3 @@
-import { Archetype } from "./archetypes";
 import { CardColor, CellCard, CivilizationCard, CreatureCard, TribalCard } from "./cards.js";
 import { Era } from "./eras.js";
 
@@ -149,10 +148,6 @@ export function getConsequencesOfCard(
     card: Exclude<CivilizationCard, CivilizationCard.Skipped>,
     era: Era.Civilization,
 ): [SpaceConsequence];
-export function getConsequencesOfCard(
-    card: Archetype,
-    era: Era.Space,
-): [];
 export function getConsequencesOfCard(color: number, era: Era) {
     return Array(Era.Space-era).fill(3*era + color);
 }
