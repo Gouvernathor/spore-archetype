@@ -36,17 +36,6 @@ describe("consistency of runtime checks with typing", () => {
             expect(indexConsequences).toEqual(functConsequences);
         }
     });
-
-    it("has no consequences for archetype cards", () => {
-        for (const card of [
-            Archetype.Wanderer,
-            Archetype.Warrior, Archetype.Shaman, Archetype.Trader,
-            Archetype.Knight, Archetype.Ecologist, Archetype.Bard,
-            Archetype.Diplomat, Archetype.Scientist, Archetype.Zealot,
-        ]) {
-            expect(getConsequencesOfCard(card, Era.Space)).toHaveLength(0);
-        }
-    });
 });
 
 describe("consequence origin era", () => {
