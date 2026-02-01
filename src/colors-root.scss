@@ -1,4 +1,4 @@
-@use "colors" as colors;
+@use "../dist/colors" as colors;
 
 :root {
     --card-color-black: #{colors.$card-color-black};
