@@ -4,26 +4,26 @@ import { CardColor } from "./cards.js";
 export const cardCSSColors: {
     [Card in CardColor]: string;
 } = {
-    [CardColor.Black]: "#000000",
-    [CardColor.Red]: "#CE3F17",
-    [CardColor.Green]: "#4DEC5F",
-    [CardColor.Blue]: "#4ABDDA",
+    [CardColor.Black]: "black",
+    [CardColor.Red]: "color(srgb 0.803 0.247 0.09)",
+    [CardColor.Green]: "color(srgb 0.3 0.92 0.37)",
+    [CardColor.Blue]: "color(srgb 0.29 0.737 0.851)",
 };
 
 export const archetypeCSSColors: {
     [Arch in Archetype]: string;
 } = {
-    [Archetype.Wanderer]: "#939699",
+    [Archetype.Wanderer]: "color(srgb 0.576 0.584 0.596)",
 
-    [Archetype.Warrior]: "#CE3F17",
-    [Archetype.Shaman]: "#4DEC5F",
-    [Archetype.Trader]: "#4ABDDA",
+    [Archetype.Warrior]: "color(srgb 0.803 0.247 0.09)",
+    [Archetype.Shaman]: "color(srgb 0.3 0.92 0.37)",
+    [Archetype.Trader]: "color(srgb 0.29 0.737 0.851)",
 
-    [Archetype.Knight]: "#CE469A",
-    [Archetype.Ecologist]: "#A3CE46",
-    [Archetype.Bard]: "#48BC8D",
+    [Archetype.Knight]: "color(srgb 0.804 0.275 0.6)",
+    [Archetype.Ecologist]: "color(srgb 0.635 0.804 0.275)",
+    [Archetype.Bard]: "color(srgb 0.282 0.733 0.549)",
 
-    [Archetype.Diplomat]: "#C6CB47",
-    [Archetype.Scientist]: "#5046CE",
-    [Archetype.Zealot]: "#A646CE",
+    [Archetype.Diplomat]: "color(srgb 0.773 0.792 0.278)",
+    [Archetype.Scientist]: "color(srgb 0.314 0.275 0.804)",
+    [Archetype.Zealot]: "color(srgb 0.647 0.275 0.804)",
 };
