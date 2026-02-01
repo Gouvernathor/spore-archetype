@@ -31,7 +31,7 @@
   "scripts": {
     "build": "npm run build:js && npm run build:css",
     "build:js": "tsc",
-    "build:css": "sass src/colors-classed.scss:dist/colors-classed.css src/colors-root.scss:dist/colors-root.css",
+    "build:css": "node scripts/generate-css.ts",
     "test": "vitest",
     "10force": "npm run build:js && node boot/10force.js"
   },
