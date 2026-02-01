@@ -13,14 +13,21 @@ function toSCSSLine(varName: string, colorValue: string): string {
     return `${varName}: ${colorValue};\n`;
 }
 
+function toCSSLine(varName: string, colorValue: string): string {
+    return `    ${varName}: ${colorValue};\n`;
+}
+
 const scssLines = [];
+const cssLines = [":root {\n"];
 
 for (const colorIdStr in cardCSSColors) {
     const colorId = +colorIdStr as CardColor;
     const colorName = CardColor[colorId];
     const scssVarName = `$card-color-${toKebabCase(colorName)}`;
+    const cssVarName = `--card-color-${toKebabCase(colorName)}`;
     const colorValue = cardCSSColors[colorId];
     scssLines.push(toSCSSLine(scssVarName, colorValue));
+    cssLines.push(toCSSLine(cssVarName, colorValue));
 }
 
 scssLines.push("\n");
@@ -29,8 +36,16 @@ for (const archetypeIdStr in archetypeCSSColors) {
     const archetypeId = +archetypeIdStr as Archetype;
     const archetypeName = Archetype[archetypeId];
     const scssVarName = `$archetype-color-${toKebabCase(archetypeName)}`;
+    const cssVarName = `--archetype-color-${toKebabCase(archetypeName)}`;
     const colorValue = archetypeCSSColors[archetypeId];
     scssLines.push(toSCSSLine(scssVarName, colorValue));
+    cssLines.push(toCSSLine(cssVarName, colorValue));
 }
 
+cssLines.push("}\n");
+
 fs.writeFileSync("./dist/_colors.scss", scssLines.join(""));
+
+fs.writeFileSync("./dist/colors-root.css", cssLines.join(""));
+cssLines[0] = ".spore-archetype-colors {\n";
+fs.writeFileSync("./dist/colors-classed.css", cssLines.join(""));

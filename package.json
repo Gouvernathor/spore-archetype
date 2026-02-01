@@ -29,10 +29,9 @@
   "author": "Gouvernathor",
   "type": "module",
   "scripts": {
-    "build": "npm run build:js && npm run build:scss && npm run build:css",
+    "build": "npm run build:js && npm run build:scss",
     "build:js": "tsc",
     "build:scss": "node scripts/generate-css.ts",
-    "build:css": "sass src/colors-classed.scss:dist/colors-classed.css src/colors-root.scss:dist/colors-root.css",
     "test": "vitest",
     "10force": "npm run build:js && node boot/10force.js"
   },
