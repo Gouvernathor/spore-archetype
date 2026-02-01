@@ -10,24 +10,23 @@ function toKebabCase(str: string): string {
 }
 
 function toSCSSLine(varName: string, colorValue: string): string {
-    return `${varName}: ${colorValue};\n`;
+    return `$${varName}: ${colorValue};\n`;
 }
 
 function toCSSLine(varName: string, colorValue: string): string {
-    return `    ${varName}: ${colorValue};\n`;
+    return `    --${varName}: ${colorValue};\n`;
 }
 
 const scssLines = [];
-const cssLines = [":root {\n"];
+const cssLines = [ ":root {\n" ];
 
 for (const colorIdStr in cardCSSColors) {
     const colorId = +colorIdStr as CardColor;
     const colorName = CardColor[colorId];
-    const scssVarName = `$card-color-${toKebabCase(colorName)}`;
-    const cssVarName = `--card-color-${toKebabCase(colorName)}`;
+    const varName = `card-color-${toKebabCase(colorName)}`;
     const colorValue = cardCSSColors[colorId];
-    scssLines.push(toSCSSLine(scssVarName, colorValue));
-    cssLines.push(toCSSLine(cssVarName, colorValue));
+    scssLines.push(toSCSSLine(varName, colorValue));
+    cssLines.push(toCSSLine(varName, colorValue));
 }
 
 scssLines.push("\n");
@@ -35,11 +34,10 @@ scssLines.push("\n");
 for (const archetypeIdStr in archetypeCSSColors) {
     const archetypeId = +archetypeIdStr as Archetype;
     const archetypeName = Archetype[archetypeId];
-    const scssVarName = `$archetype-color-${toKebabCase(archetypeName)}`;
-    const cssVarName = `--archetype-color-${toKebabCase(archetypeName)}`;
+    const varName = `archetype-color-${toKebabCase(archetypeName)}`;
     const colorValue = archetypeCSSColors[archetypeId];
-    scssLines.push(toSCSSLine(scssVarName, colorValue));
-    cssLines.push(toCSSLine(cssVarName, colorValue));
+    scssLines.push(toSCSSLine(varName, colorValue));
+    cssLines.push(toCSSLine(varName, colorValue));
 }
 
 cssLines.push("}\n");
