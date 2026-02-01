@@ -19,7 +19,6 @@ function toCSSLine(varName: string, colorValue: string): string {
 
 const scssLines = [];
 const cssLines = [ ":root {\n" ];
-
 for (const colorIdStr in cardCSSColors) {
     const colorId = +colorIdStr as CardColor;
     const varName = `card-color-${toKebabCase(CardColor[colorId])}`;
@@ -27,9 +26,7 @@ for (const colorIdStr in cardCSSColors) {
     scssLines.push(toSCSSLine(varName, colorValue));
     cssLines.push(toCSSLine(varName, colorValue));
 }
-
 scssLines.push("\n");
-
 for (const archetypeIdStr in archetypeCSSColors) {
     const archetypeId = +archetypeIdStr as Archetype;
     const varName = `archetype-color-${toKebabCase(Archetype[archetypeId])}`;
@@ -37,7 +34,6 @@ for (const archetypeIdStr in archetypeCSSColors) {
     scssLines.push(toSCSSLine(varName, colorValue));
     cssLines.push(toCSSLine(varName, colorValue));
 }
-
 cssLines.push("}\n");
 
 fs.writeFileSync("./dist/_colors.scss", scssLines.join(""));
